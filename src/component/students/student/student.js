@@ -2,25 +2,33 @@ import React from "react";
 import './student.css'
 
 const Student = (props) =>{
-    const handelChange = (e) =>{
-        return 
-    }
     return(
         <div className="students">
-            <label>Student Number: {props.id}</label>
-
+            <label>Student Number : {props.id}</label>
+            <div>
+                <label>Full Name :</label>
+                <input type='email' value={props.name} onChange={props.nameChange} />
+            </div>
+            <div>
+                <label>Class :</label>
+                <input type='text' value={props.class} onChange={props.classChange} />
+            </div>
+            <div>
+                <label>Phone Number :</label>
+                <input type='number' value={props.phoneNumber} />
+            </div>
+            <div>
+                <label>Email :</label>
+                <input type='email' value={props.email} />
+            </div>
             
-            <label>Full Name</label>
-            <input type='email' value={props.name} onChange={props.nameChange} />
 
-            <label>Class</label>
-            <input type='text' value={props.class} />
 
-            <label>Phone Number</label>
-            <input type='number' value={props.phoneNumber} />
 
-            <label>Email</label>
-            <input type='email' value={props.email} />
+
+
+
+
 
         </div>
     )

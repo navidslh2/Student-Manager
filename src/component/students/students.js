@@ -12,7 +12,8 @@ const Students = (props) =>{
             class={student.class} 
             phoneNumber={student.phoneNumber} 
             email={student.email}
-            nameChange={(event) => props.nameChange(event, student.id)}/>
+            nameChange={(event) => props.nameChange(event, student.id)}
+            classChange={(event)=> props.classChange(event,student.id)}/>
             
         })
     )
