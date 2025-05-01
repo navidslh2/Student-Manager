@@ -1,0 +1,23 @@
+.Button {
+  color: black;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  box-shadow: 2px 2px 8px rgba(94, 93, 93, 0.623);
+  transition: all 0.5s ease-in-out;
+}
+.Red {
+  background-color: #fc2121;
+}
+.Red:hover {
+  box-shadow: 0px 0px 15px 2px #fc2121;
+  opacity: 0.9;
+}
+.Green {
+    background-color: rgb(35, 163, 35);
+}
+.Green:hover {
+    box-shadow: 0px 0px 15px 2px rgb(35, 163, 35);
+    opacity: 0.9;
+  }
