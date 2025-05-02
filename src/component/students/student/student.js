@@ -1,6 +1,6 @@
 import React from "react";
 import './student.css'
-import Button from "../../button/button";
+import Button from "../../ui/button/button";
 
 const Student = (props) =>{
     return(
@@ -16,7 +16,7 @@ const Student = (props) =>{
             </div>
             <div className="input-wrapper"> 
                 <label>Phone Number :</label>
-                <input type='number' value={props.phoneNumber} />
+                <input type='number' value={props.phoneNumber} onChange={props.phoneChange}/>
             </div>
             <div className="input-wrapper">
                 <label>Email :</label>

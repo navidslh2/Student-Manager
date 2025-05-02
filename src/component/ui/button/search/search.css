@@ -1,0 +1,41 @@
+.searchbar-container {
+    width: 40%;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 30px;
+    position: relative;
+    margin: auto;
+    transition: all 0.5s ease-in-out;
+}
+.searchbar {
+    width: 100%;
+    height: 35px;
+    margin: 30px auto;
+    background-color: transparent;
+    border: solid 2px rgb(0, 49, 82);
+    border-radius: 20px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+    padding-left: 40px;
+}
+.searchbar:focus {
+    outline: none;
+}
+.searchbar-container:hover {
+    width: 80%;
+}
+svg{
+    position: absolute;
+    left: 8px;
+    font-weight: bold;
+}
+@media (min-width:700px){
+    .searchbar-container {
+        width: 40%;
+    }
+    .searchbar-container:hover {
+        width: 60%;
+    }
+}
+
