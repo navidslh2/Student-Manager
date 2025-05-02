@@ -1,14 +1,15 @@
 import React from "react";
 import './student.css'
 import Button from "../../ui/button/button";
+import PropTypes from "prop-types";
 
 const Student = (props) =>{
     return(
         <div className="students">
-            <label>Student Number : {props.id}</label>
+            <h3>Student Number : {props.id}</h3>
             <div className="input-wrapper">
                 <label>Full Name :</label>
-                <input type='email' value={props.name} onChange={props.nameChange} />
+                <input type='text' value={props.name} onChange={props.nameChange} />
             </div>
             <div className="input-wrapper">
                 <label>Class :</label>
@@ -32,4 +33,16 @@ const Student = (props) =>{
     )
 }
 
-export default Student
+export default React.memo(Student)
+
+Student.propTypes = {
+    id:PropTypes.number.isRequired,
+    name:PropTypes.string.isRequired,
+    nameChange:PropTypes.func.isRequired,
+    class:PropTypes.string.isRequired,
+    classChange:PropTypes.func.isRequired,
+    phoneNumber:PropTypes.number.isRequired,
+    phoneChange:PropTypes.func.isRequired,
+    email:PropTypes.string.isRequired,
+    deleteStudent:PropTypes.func.isRequired
+}

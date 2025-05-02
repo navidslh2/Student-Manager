@@ -1,6 +1,7 @@
 import React from "react";
 import Student from "./student/student";
 import '../students/student/student.css'
+import PropTypes from "prop-types";
 const Students = (props) =>{
     if (props.display){
         return(
@@ -46,4 +47,13 @@ const Students = (props) =>{
     )
 }
 
-export default Students
+export default React.memo(Students)
+
+Students.propTypes ={
+    display:PropTypes.bool.isRequired,
+    studentList:PropTypes.array.isRequired,
+    nameChange:PropTypes.func.isRequired,
+    classChange:PropTypes.func.isRequired,
+    phoneChange:PropTypes.func.isRequired,
+    deleteStudent:PropTypes.func.isRequired
+}

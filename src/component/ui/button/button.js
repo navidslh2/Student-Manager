@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import './button.css'
 const Button = (props) =>{
     let classes = ["Button"]
@@ -8,6 +9,10 @@ const Button = (props) =>{
             break
         case "green":
             classes.push("Green")
+            break
+        case "blue":
+            classes.push("Blue")  
+            break  
         default:
             break
     }
@@ -21,4 +26,10 @@ const Button = (props) =>{
     )
 }
 
-export default Button
+export default React.memo(Button)
+
+Button.propTypes = {
+    clicked:PropTypes.func.isRequired,
+    children:PropTypes.string.isRequired,
+    btnType:PropTypes.func.isRequired
+}
