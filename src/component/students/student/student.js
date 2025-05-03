@@ -21,7 +21,7 @@ const Student = (props) =>{
             </div>
             <div className="input-wrapper">
                 <label>Email :</label>
-                <input type='email' value={props.email} />
+                <input type='email' value={props.email} onChange={props.emailChange} />
             </div>
             <Button 
             btnType="red"

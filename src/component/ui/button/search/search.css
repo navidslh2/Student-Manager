@@ -1,5 +1,5 @@
 .searchbar-container {
-    width: 40%;
+    width: 35%;
     height: 35px;
     display: flex;
     align-items: center;
@@ -24,20 +24,20 @@
     box-shadow: 0px 0px 10px rgb(0, 49, 82);
 
 }
-.searchbar-container:hover {
-    width: 80%;
+.searchbar-container:focus-within {
+    width: 70%;
 }
 svg{
     position: absolute;
     left: 8px;
     font-weight: bold;
 }
-@media (min-width:700px){
+@media (max-width:700px){
     .searchbar-container {
-        width: 40%;
+        width: 20%;
     }
-    .searchbar-container:hover {
-        width: 60%;
+    .searchbar-container:focus-within{
+        width: 40%;
     }
 }
 

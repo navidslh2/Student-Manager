@@ -19,7 +19,7 @@ const Students = (props) =>{
                         classChange={(event)=> props.classChange(event,student.id)}
                         phoneChange={(event)=>{props.phoneChange(event,student.id)}}
                         deleteStudent={()=>props.deleteStudent(index)}
-                        
+                        emailChange={(event)=>{props.emailChange(event, student.id)}}
                         />
                         
                     })
@@ -41,6 +41,7 @@ const Students = (props) =>{
             classChange={(event)=> props.classChange(event,student.id)}
             phoneChange={(event)=>{props.phoneChange(event,student.id)}}
             deleteStudent={()=>props.deleteStudent(index)}
+            emailChange={(event)=>{props.emailChange(event, student.id)}}
             />
             
         })

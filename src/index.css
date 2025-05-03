@@ -1,8 +1,17 @@
+@font-face {
+  font-family: 'vazir';
+  font-style: normal;
+  font-weight: 400;
+  src: url(./assets/fonts/Vazir-Black.eot);
+  src: local('vazir'),local('vazir'),
+      url('./assets/fonts/Vazir.eot') format('eot'),
+      url('./assets/fonts/Vazir.ttf') format('ttf'),
+      url('./assets/fonts/Vazir-Thin.woff') format('woff'),
+      url('./assets/fonts/Vazir.woff2') format('woff2'),
+}
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'vazir';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -11,3 +20,4 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+ 

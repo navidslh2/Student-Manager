@@ -44,10 +44,12 @@ function App() {
       email: "navidslh6@gmail.com",
     },
   ]);
-    const inputEl = useRef(null)
-    const scroll = ()=>{
-      window.scrollTo(0,inputEl.current.offsetTop)
-    }
+  const inputEl = useRef(null)
+  const scrollHandler = ()=>{
+    const rect = inputEl.current.getBoundingClientRect();
+    window.scrollTo(0, rect.top + window.scrollY);
+    inputEl.current.focus()
+  }
     // start add student
     const [studentName, setStudentName] = useState('')
     const [studentClass, setStudentClass] = useState('')
@@ -141,6 +143,16 @@ function App() {
     student[studentIndex] = studentChanged
     setStudents(student)
  }
+ const emailChangeHandler = (event, id)=>{
+  const studentIndex = students.findIndex(()=>{
+    return students.id = id
+  })
+  const studentChanged = {...students[studentIndex]}
+  studentChanged.email = event.target.value
+  const student = [...students]
+  student[studentIndex] = studentChanged
+  setStudents(student)
+ }
   const deleteStudenthandler = (index) => {
     const student = [...students];
     student.splice(index, 1);
@@ -161,7 +173,7 @@ function App() {
       newStudentEmail={newStudentEmailhandler}
       addStudent={addStudentHandler}
       />
-      <Search
+        <Search
         inputValue={searchBarValue}
         changeValue={searchFilterFunction}
         ref={inputEl}
@@ -176,10 +188,12 @@ function App() {
         deleteStudent={deleteStudenthandler}
         display={toggle}
         phoneChange={phoneChangehandler}
+        emailChange={emailChangeHandler}
       />
+ 
       <Button
       btnType="blue"
-      clicked={scroll}
+      clicked={scrollHandler}
       >
         scroll to input
       </Button>

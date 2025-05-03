@@ -1,3 +1,4 @@
+
 .new-students {
     width: 80%;
     margin: auto;
@@ -13,35 +14,44 @@
     justify-content: center;
     gap: 20px;
     position: relative;
+    
   }
-  .input-wrapper {
-    width: 80%;
-    height: 35px;
-    border-bottom: solid 1px #c7dfff7a;
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    padding-left: 10px;
+.input-wrapper {
+  width: 80%;
+  height: 35px;
+  border-bottom: solid 1px #c7dfff7a;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  padding-left: 10px;
+}
+.new-students label {
+  color: black;
+  font-weight: bold;
+}
+.new-students input {
+  background-color: transparent;
+  border: none;
+  padding: 3px 0 0 10px;
+  color: black;
+}
+.new-students input:focus {
+  border: none;
+  outline: none;
+}
+
+@media (min-width: 500px) {
+  .new-students {
+    width: 450px;
   }
-  .new-students label {
-    color: black;
-    font-weight: bold;
-  }
-  .new-students input {
-    background-color: transparent;
-    border: none;
-    padding: 3px 0 0 10px;
-    color: black;
-  }
-  .new-students input:focus {
-    border: none;
-    outline: none;
-  }
-  
-  @media (min-width: 500px) {
-    .new-students {
-      width: 450px;
-    }
-  }
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+input[type=number] {
+-moz-appearance: textfield;
+}
   
   
