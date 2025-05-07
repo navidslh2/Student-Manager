@@ -2,7 +2,7 @@
 .new-students {
     width: 80%;
     margin: auto;
-    padding: 30px 20px 40px 20px;
+    padding: 30px 20px 10px 20px;
     background-color: rgba(0, 49, 82, 0.527);
     backdrop-filter: blur(5px);
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
@@ -13,8 +13,7 @@
     align-items: center;
     justify-content: center;
     gap: 20px;
-    position: relative;
-    
+    position: relative;    
   }
 .input-wrapper {
   width: 80%;

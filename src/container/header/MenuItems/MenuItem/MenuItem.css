@@ -1,0 +1,22 @@
+MenuItem {
+    height: 50px;
+    color: whitesmoke;
+    margin: 0;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+
+}
+.MenuItem a {
+    height: 100%;
+    line-height: 50px;
+    text-decoration: none;
+    display: flex;
+    transition: all 0.3s ease-in-out;
+
+}
+.MenuItem a:hover {
+    border-bottom: solid 2px whitesmoke;
+    color: black;
+    cursor: pointer;
+}

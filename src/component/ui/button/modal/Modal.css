@@ -1,0 +1,50 @@
+.Modal {
+    width: 500px;
+    background-color: rgba(0, 49, 82, 0.856);
+    backdrop-filter: blur(8px);
+    position: fixed;
+    top: -100vh;
+    left: calc(50% - 250px);
+    z-index: 50;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 30px;
+    transition: all 0.5s ease-in-out;
+
+}
+@media (max-width:600px) {
+    .Modal {
+        width: 70%;
+        left: 15%;
+        background-color:  rgba(0, 49, 82, 0.856);
+        padding: 30px 0;
+    }
+}
+
+.showModal {
+    top: 30%;
+    animation: showModal 0.7s ;
+
+}
+@keyframes showModal {
+    0% {
+        top: -100vh;
+        transform: scale(0.7);
+        opacity: 0;
+}
+    60% {
+        top: 35%;
+        transform:scale(1.1);
+        opacity: 0.8;
+}
+    80% {
+        top: 28%;
+        transform: scale(0.95);
+        opacity: 0.95;
+}
+    100% {
+        top: 30%;
+        transform:scale(1);
+        opacity: 1;
+}
+}

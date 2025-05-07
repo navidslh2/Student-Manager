@@ -5,7 +5,8 @@ import React, { useState,useEffect, useRef } from "react";
 import './component/students/student/student.css'
 import Search from "./component/ui/button/search/Search";
 import NewStudent from "./component/students/newStudent/newStudent";
-
+import Toolbar from "./container/header/toolbar/Toolbar";
+import '@fortawesome/fontawesome-free/css/all.min.css'
 function App() {
   const [students, setStudents] = useState([
     {
@@ -102,7 +103,6 @@ function App() {
     })
     setSearchBarValue(event.target.value)
     setStudents(search)
-    console.log(search)
   };
   // finish search
   // start change display
@@ -153,7 +153,7 @@ function App() {
   student[studentIndex] = studentChanged
   setStudents(student)
  }
-  const deleteStudenthandler = (index) => {
+  const  deleteStudenthandler = (index) => {
     const student = [...students];
     student.splice(index, 1);
     setStudents(student);
@@ -162,6 +162,7 @@ function App() {
 
   return (
     <div className="App">
+      <Toolbar />
       <NewStudent
       studentName={studentName}
       studentClass={studentClass}
@@ -195,8 +196,9 @@ function App() {
       btnType="blue"
       clicked={scrollHandler}
       >
-        scroll to input
+        <i class="fa-solid fa-angle-up"></i>
       </Button>
+      
     </div>
   );
 }
