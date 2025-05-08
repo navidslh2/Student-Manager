@@ -5,7 +5,6 @@ MenuItem {
     box-sizing: border-box;
     display: flex;
     align-items: center;
-
 }
 .MenuItem a {
     height: 100%;
@@ -13,10 +12,29 @@ MenuItem {
     text-decoration: none;
     display: flex;
     transition: all 0.3s ease-in-out;
-
+    align-items: center;
+    justify-content: center;
 }
-.MenuItem a:hover {
-    border-bottom: solid 2px whitesmoke;
-    color: black;
-    cursor: pointer;
+@media(min-width:992px){
+    .MenuItem a:hover {
+        border-bottom: solid 2px whitesmoke;
+        color: black;
+        cursor: pointer;
+    }
+}
+
+@media(max-width:992px){
+    MenuItem {
+        width: 200px;
+    }
+    .MenuItem a {
+        height: 30px;
+        width: 200px;
+    
+    }
+    .MenuItem a:hover {
+        border-left: solid 2px whitesmoke;
+        color: black !important;
+        cursor: pointer;
+    }    
 }

@@ -7,6 +7,7 @@ import Search from "./component/ui/button/search/Search";
 import NewStudent from "./component/students/newStudent/newStudent";
 import Toolbar from "./container/header/toolbar/Toolbar";
 import '@fortawesome/fontawesome-free/css/all.min.css'
+import SideDrawer from "./container/header/SideDrawer/SideDrawer";
 function App() {
   const [students, setStudents] = useState([
     {
@@ -162,6 +163,7 @@ function App() {
 
   return (
     <div className="App">
+      
       <Toolbar />
       <NewStudent
       studentName={studentName}

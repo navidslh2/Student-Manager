@@ -5,3 +5,12 @@
     list-style: none;
     gap: 20px;
 }
+@media(max-width:992px){
+    .MenuItems{
+        display: flex;
+        flex-direction: column;
+        padding-top: 30px;
+        gap: 10px;
+        width: 100%;
+    }
+}
