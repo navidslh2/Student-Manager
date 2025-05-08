@@ -6,7 +6,6 @@ import Backdrop from "../../../component/ui/button/backdrop/Backdrop";
 
 const SideDrawer=(props)=>{    
     let classSideDrawer=["SideDrawer"]
-    console.log(classSideDrawer.join(" "))
     if(props.open){
         classSideDrawer=["SideDrawer" , "open"]
     }else{

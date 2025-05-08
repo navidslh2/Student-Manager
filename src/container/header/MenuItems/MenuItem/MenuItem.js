@@ -1,11 +1,12 @@
 import PropTypes from "prop-types";
 import React from "react";
 import './MenuItem.css'
+import { Link, NavLink } from "react-router";
 
 const MenuItem =(props)=>{
     return(
         <li className="MenuItem">  
-            <a href={props.link}>{props.children}</a>
+            <NavLink to={props.link}>{props.children}</NavLink>
         </li>
     )
 }

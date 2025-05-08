@@ -5,10 +5,10 @@ import './MenuItems.css'
 const MenuItems= ()=>{
     return(
         <div className="MenuItems">
-            <MenuItem>
+            <MenuItem link="/">
                 Home
             </MenuItem>
-            <MenuItem>
+            <MenuItem link="/add-student">
                 Add Student
             </MenuItem>
         </div>
