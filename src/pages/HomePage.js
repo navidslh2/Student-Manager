@@ -3,15 +3,20 @@ import Toolbar from "../container/header/toolbar/Toolbar";
 import Search from "../component/ui/button/search/Search";
 import Button from "../component/ui/button/button";
 import Students from "../component/students/students";
+import { Route, useNavigate } from "react-router";
+import axios from "axios";
+import './style/Homepage.css'
+import Spinner from "../component/ui/button/spinner/spinner";
+import ErrorHandler from "../component/hoc/ErrorHandler";
 
-const HomePages = () => {
+const HomePage = (props) => {
   const [students, setStudents] = useState([
     {
       id: 1,
       fullName: "Navid Salehi",
       class: "a12",
       phoneNumber: 1234,
-      email: "`navidslh2@gmail.com`",
+      email: "navidslh2@gmail.com",
     },
     {
       id: 2,
@@ -51,9 +56,15 @@ const HomePages = () => {
   // start search
   const [searchBarValue, setSearchBarValue] = useState("");
   const [arrayHolder, setArrayHolder] = useState("");
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
+    setLoading(true);
     setArrayHolder(students);
     inputEl.current.focus();
+    axios.get("https://jsonplaceholder.ir/posts").then((response) => {
+      setStudents(response.data);
+      setLoading(false);
+    });
   }, []);
   const searchFilterFunction = (event) => {
     const searchData = event.target.value.toUpperCase();
@@ -119,8 +130,13 @@ const HomePages = () => {
     setStudents(student);
   };
   // finish show student information
+  let navigate = useNavigate();
+  const editStudentHandler = (id) => {
+    console.log(id);
+    navigate(`/students/${id}`);
+  };
   return (
-    <React.Fragment>
+    <div className="Homepage">
       <Toolbar />
       <Search
         inputValue={searchBarValue}
@@ -130,20 +146,23 @@ const HomePages = () => {
       <Button btnType="blue" clicked={displayHandler}>
         Change display
       </Button>
-      <Students
-        studentList={students}
-        nameChange={nameChangeHandler}
-        classChange={classChangehandler}
-        deleteStudent={deleteStudenthandler}
-        display={toggle}
-        phoneChange={phoneChangehandler}
-        emailChange={emailChangeHandler}
-      />
+      {loading ? (<Spinner /> ) :
+       (<Students
+          studentList={students}
+          nameChange={nameChangeHandler}
+          classChange={classChangehandler}
+          deleteStudent={deleteStudenthandler}
+          display={toggle}
+          phoneChange={phoneChangehandler}
+          emailChange={emailChangeHandler}
+          edit={editStudentHandler}
+        />
+      )}
       <Button btnType="blue" clicked={scrollHandler}>
-        <i class="fa-solid fa-angle-up"></i>
+        <i className="fa-solid fa-angle-up"></i>
       </Button>
-    </React.Fragment>
+    </div>
   );
 };
 
-export default HomePages;
+export default React.memo(ErrorHandler(HomePage, axios));

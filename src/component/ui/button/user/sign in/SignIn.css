@@ -1,5 +1,6 @@
 .input-container {
-    margin: 30px 40px;
+    width: 90%;
+    margin: 10px auto;
     border-bottom: solid 1px #c7dfff7a;  
 }
 
@@ -16,6 +17,37 @@
     color: whitesmoke;
 }
 input::placeholder{
-    color: rgb(231, 231, 231);
+    color: rgba(231, 231, 231, 0.507);
     font-size: 15px;
+    transition: opacity 0.2s ease-in-out;
+
+}
+input:focus::placeholder{
+    opacity: 0;
+}
+.captcha-conteiner {
+    width: 90%;     
+    margin: 30px auto;
+    border-bottom: solid 1px #c7dfff7a; 
+    display:  flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.captcha-conteiner div{
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 3px;
+}
+.captcha-conteiner input {
+    width: 65%;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    color: whitesmoke;
+    transition: opacity 0.2s ease-in-out;
+}
+.captcha-conteiner span {
+    font-size: 20px;
 }

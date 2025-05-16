@@ -1,12 +1,15 @@
 import PropTypes from "prop-types";
 import React from "react";
 import './MenuItem.css'
-import { Link, NavLink } from "react-router";
+import { NavLink } from "react-router-dom";
+
 
 const MenuItem =(props)=>{
     return(
         <li className="MenuItem">  
-            <NavLink to={props.link}>{props.children}</NavLink>
+            <NavLink to={props.link} className={({isActive})=> isActive? "active":""}> 
+                {props.children}
+            </NavLink>
         </li>
     )
 }

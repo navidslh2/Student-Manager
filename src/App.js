@@ -1,16 +1,14 @@
 import "./App.css";
-import Button from "./component/ui/button/button";
-import Students from "./component/students/students";
-import React, { useState,useEffect, useRef } from "react";
-import './component/students/student/student.css'
-import Search from "./component/ui/button/search/Search";
-import NewStudent from "./component/students/newStudent/newStudent";
+import "./component/students/student/student.css";
 import Toolbar from "./container/header/toolbar/Toolbar";
-import '@fortawesome/fontawesome-free/css/all.min.css'
-import SideDrawer from "./container/header/SideDrawer/SideDrawer";
-import { BrowserRouter, Route, Router, Routes } from "react-router";
-import HomePages from "./pages/HomePages";
-import AddStudentPages from "./pages/AddStudentPages";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import { BrowserRouter, Route, Routes } from "react-router";
+import HomePage from "./pages/HomePage";
+import EditStudentPage from "./pages/EditStudentPage";
+import NotFoundPage from "./component/404page/NotFoundPage";
+import React, { Suspense } from "react";
+const AddStudentPage = React.lazy(() => import("./pages/AddStudentPage"));
+
 function App() {
   // const [students, setStudents] = useState([
   //   {
@@ -55,44 +53,44 @@ function App() {
   //   window.scrollTo(0, rect.top + window.scrollY);
   //   inputEl.current.focus()
   // }
-    // start add student
-    // const [studentName, setStudentName] = useState('')
-    // const [studentClass, setStudentClass] = useState('')
-    // const [studentPhone, setStudentPhone] = useState('')
-    // const [studentEmail, setStudentEmail] = useState('')
-    // const newStudentNamehandler = (event)=>{
-    //   setStudentName(event.target.value)
-    // }
-    // const newStudentClasshandler = (event)=>{
-    //   setStudentClass(event.target.value)
-    // }
-    // const newStudentPhonehandler = (event)=>{
-    //   setStudentPhone(event.target.value)
-    // }
-    // const newStudentEmailhandler = (event)=>{
-    //   setStudentEmail(event.target.value)
-    // }
-    // const addStudentHandler = ()=>{
-    //   const newStudent={}
-    //   if (studentName !=='' && studentClass !=='' && studentPhone !=='' && studentEmail !==''){
-    //     newStudent.id = students.length +1
-    //     newStudent.fullName = studentName
-    //     newStudent.class = studentClass
-    //     newStudent.phoneNumber = studentPhone
-    //     newStudent.email = studentEmail
-    //   }else(
-    //     alert("fill in all")
-    //   )
-    //   const newStudents = [...students]
-    //   newStudents.push(newStudent)
-    //   setStudents(newStudents)
-    //   setStudentName('')
-    //   setStudentClass('')
-    //   setStudentPhone('')
-    //   setStudentEmail('')
-    // }
-    // finish add student
-  // start search 
+  // start add student
+  // const [studentName, setStudentName] = useState('')
+  // const [studentClass, setStudentClass] = useState('')
+  // const [studentPhone, setStudentPhone] = useState('')
+  // const [studentEmail, setStudentEmail] = useState('')
+  // const newStudentNamehandler = (event)=>{
+  //   setStudentName(event.target.value)
+  // }
+  // const newStudentClasshandler = (event)=>{
+  //   setStudentClass(event.target.value)
+  // }
+  // const newStudentPhonehandler = (event)=>{
+  //   setStudentPhone(event.target.value)
+  // }
+  // const newStudentEmailhandler = (event)=>{
+  //   setStudentEmail(event.target.value)
+  // }
+  // const addStudentHandler = ()=>{
+  //   const newStudent={}
+  //   if (studentName !=='' && studentClass !=='' && studentPhone !=='' && studentEmail !==''){
+  //     newStudent.id = students.length +1
+  //     newStudent.fullName = studentName
+  //     newStudent.class = studentClass
+  //     newStudent.phoneNumber = studentPhone
+  //     newStudent.email = studentEmail
+  //   }else(
+  //     alert("fill in all")
+  //   )
+  //   const newStudents = [...students]
+  //   newStudents.push(newStudent)
+  //   setStudents(newStudents)
+  //   setStudentName('')
+  //   setStudentClass('')
+  //   setStudentPhone('')
+  //   setStudentEmail('')
+  // }
+  // finish add student
+  // start search
   // const [searchBarValue, setSearchBarValue] = useState("");
   // const [arrayHolder, setArrayHolder] = useState('')
   // useEffect(()=>{
@@ -117,65 +115,66 @@ function App() {
   // finish change display
   // start show student information
 
-//   const nameChangeHandler = (event, id) => {
-//     const studentIndex = students.findIndex((elem) => {
-//       return elem.id == id;
-//     });
-//     const studentChanged = { ...students[studentIndex] };
-//     studentChanged.fullName = event.target.value;
-//     const student = [...students];
-//     student[studentIndex] = studentChanged;
-//     setStudents(student);
-//   };
-//   const classChangehandler = (event, id) => {
-//     const studentIndex = students.findIndex((elem) => {
-//       return elem.id === id;
-//     });
-//     const studentChanged = { ...students[studentIndex] };
-//     studentChanged.class = event.target.value;
-//     const student = [...students];
-//     student[studentIndex] = studentChanged;
-//     setStudents(student);
-//   };
-//   const phoneChangehandler = (event,id)=>{
-//     const studentIndex =  students.findIndex((elem)=>{
-//       return elem.id == id
-//     })
-//     const studentChanged = {...students[studentIndex]}
-//     studentChanged.phoneNumber = event.target.value
-//     const student = [...students]
-//     student[studentIndex] = studentChanged
-//     setStudents(student)
-//  }
-//  const emailChangeHandler = (event, id)=>{
-//   const studentIndex = students.findIndex(()=>{
-//     return students.id = id
-//   })
-//   const studentChanged = {...students[studentIndex]}
-//   studentChanged.email = event.target.value
-//   const student = [...students]
-//   student[studentIndex] = studentChanged
-//   setStudents(student)
-//  }
-//   const  deleteStudenthandler = (index) => {
-//     const student = [...students];
-//     student.splice(index, 1);
-//     setStudents(student);
-//   };
- // finish show student information
+  //   const nameChangeHandler = (event, id) => {
+  //     const studentIndex = students.findIndex((elem) => {
+  //       return elem.id == id;
+  //     });
+  //     const studentChanged = { ...students[studentIndex] };
+  //     studentChanged.fullName = event.target.value;
+  //     const student = [...students];
+  //     student[studentIndex] = studentChanged;
+  //     setStudents(student);
+  //   };
+  //   const classChangehandler = (event, id) => {
+  //     const studentIndex = students.findIndex((elem) => {
+  //       return elem.id === id;
+  //     });
+  //     const studentChanged = { ...students[studentIndex] };
+  //     studentChanged.class = event.target.value;
+  //     const student = [...students];
+  //     student[studentIndex] = studentChanged;
+  //     setStudents(student);
+  //   };
+  //   const phoneChangehandler = (event,id)=>{
+  //     const studentIndex =  students.findIndex((elem)=>{
+  //       return elem.id == id
+  //     })
+  //     const studentChanged = {...students[studentIndex]}
+  //     studentChanged.phoneNumber = event.target.value
+  //     const student = [...students]
+  //     student[studentIndex] = studentChanged
+  //     setStudents(student)
+  //  }
+  //  const emailChangeHandler = (event, id)=>{
+  //   const studentIndex = students.findIndex(()=>{
+  //     return students.id = id
+  //   })
+  //   const studentChanged = {...students[studentIndex]}
+  //   studentChanged.email = event.target.value
+  //   const student = [...students]
+  //   student[studentIndex] = studentChanged
+  //   setStudents(student)
+  //  }
+  //   const  deleteStudenthandler = (index) => {
+  //     const student = [...students];
+  //     student.splice(index, 1);
+  //     setStudents(student);
+  //   };
+  // finish show student information
 
   return (
     <BrowserRouter>
       <div className="App">
-      <Toolbar />
-      <Routes>
-        <Route path='/' Component={HomePages} />
-        <Route path='/add-student'  Component={AddStudentPages} />
-      </Routes>
-      
-    </div>
+        <Toolbar />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/add-student" element={<Suspense fallback={<div>...loading</div>}><AddStudentPage /></Suspense>} />
+          <Route path="students/:id" element={<EditStudentPage />} />
+
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </div>
     </BrowserRouter>
-    
   );
 }
 

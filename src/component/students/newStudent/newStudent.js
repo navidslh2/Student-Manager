@@ -1,13 +1,19 @@
-import React from "react";
-import './newStudent.css'
+import React, {useEffect} from "react";
+import classes from './newStudent.module.css'
 import Button from "../../ui/button/button";
 import PropTypes from "prop-types";
+import Wrapper from "../../hoc/Wrapper";
+import WithClass from "../../hoc/WithClass";
+ 
+
+
 
 const NewStudent = (props)=>{
     const {studentName, studentClass, studentPhone, studentEmail} = props
     const {newStudentName, newStudentClass, newStudentPhone, newStudentEmail} = props
+
     return(
-        <div className="new-students">
+        <Wrapper>
             <h2>Add A New Student</h2>
             <div className="input-wrapper">
                 <label>Full Name :</label>
@@ -31,11 +37,11 @@ const NewStudent = (props)=>{
             >
                 Add Student
             </Button>
-        </div>
+        </Wrapper>
     )
 }
 
-export default React.memo(NewStudent)
+export default React.memo(WithClass(NewStudent,classes.newStudents))
 
 NewStudent.propsTypes = {
     studentName:PropTypes.string.isRequired,

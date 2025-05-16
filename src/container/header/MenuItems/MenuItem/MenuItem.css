@@ -1,6 +1,5 @@
 MenuItem {
     height: 50px;
-    color: whitesmoke;
     margin: 0;
     box-sizing: border-box;
     display: flex;
@@ -14,11 +13,13 @@ MenuItem {
     transition: all 0.3s ease-in-out;
     align-items: center;
     justify-content: center;
+    color: whitesmoke;
 }
 @media(min-width:992px){
-    .MenuItem a:hover {
+    .MenuItem a:hover,
+    .active{
         border-bottom: solid 2px whitesmoke;
-        color: black;
+        color: black !important;
         cursor: pointer;
     }
 }
@@ -32,7 +33,8 @@ MenuItem {
         width: 200px;
     
     }
-    .MenuItem a:hover {
+    .MenuItem a:hover,
+    .active {
         border-left: solid 2px whitesmoke;
         color: black !important;
         cursor: pointer;

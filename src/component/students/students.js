@@ -23,6 +23,7 @@ const Students = (props) =>{
                             phoneChange={(event)=>{props.phoneChange(event,student.id)}}
                             deleteStudent={()=>props.deleteStudent(index)}
                             emailChange={(event)=>{props.emailChange(event, student.id)}}
+                            edit={()=>props.edit(student.id)}
                         />
                         </ErrorBoundary>
                         )
@@ -48,6 +49,7 @@ const Students = (props) =>{
                     phoneChange={(event)=>{props.phoneChange(event,student.id)}}
                     deleteStudent={()=>props.deleteStudent(index)}
                     emailChange={(event)=>{props.emailChange(event, student.id)}}
+                     edit={()=>props.edit(student.id)}
                     />
                 </ErrorBoundary>
             )

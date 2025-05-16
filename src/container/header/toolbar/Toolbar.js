@@ -58,7 +58,7 @@ const Toolbar = ()=>{
             backdropClick={backdropClickHandler}
             show={showModal}
             >
-                <SignIn />
+                <SignIn show={showModal} />
             </Modal>
         </div>
     )

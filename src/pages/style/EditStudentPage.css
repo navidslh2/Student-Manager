@@ -1,5 +1,5 @@
 
-.new-students {
+.newStudents {
     width: 80%;
     margin: auto;
     padding: 30px 20px 10px 20px;
@@ -24,23 +24,23 @@
   justify-content: start;
   padding-left: 10px;
 }
-.new-students label {
+.newStudents label {
   color: black;
   font-weight: bold;
 }
-.new-students input {
+.newStudents input {
   background-color: transparent;
   border: none;
   padding: 3px 0 0 10px;
   color: black;
 }
-.new-students input:focus {
+.newStudents input:focus {
   border: none;
   outline: none;
 }
 
 @media (min-width: 500px) {
-  .new-students {
+  .newStudents {
     width: 450px;
   }
 }

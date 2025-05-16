@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import Toolbar from "../container/header/toolbar/Toolbar";
 import NewStudent from "../component/students/newStudent/newStudent"
-const AddStudentPages = () => {
+import { Navigate } from "react-router-dom";
+const AddStudentPage = (props) => {
   const [students, setStudents] = useState([
     {
       id: 1,
@@ -56,7 +57,9 @@ const AddStudentPages = () => {
   const newStudentEmailhandler = (event) => {
     setStudentEmail(event.target.value);
   };
+   const [result, setResult] = useState(false)
   const addStudentHandler = () => {
+    setResult(true)
     const newStudent = {};
     if (
       studentName !== "" &&
@@ -78,6 +81,9 @@ const AddStudentPages = () => {
     setStudentPhone("");
     setStudentEmail("");
   };
+  if(result){
+    return <Navigate to='/' replace />
+  }
   // finish add student
   return (
     <React.Fragment>
@@ -97,4 +103,4 @@ const AddStudentPages = () => {
   );
 };
 
-export default AddStudentPages;
+export default AddStudentPage;
