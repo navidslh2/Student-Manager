@@ -6,7 +6,9 @@ import { BrowserRouter, Route, Routes } from "react-router";
 import HomePage from "./pages/HomePage";
 import EditStudentPage from "./pages/EditStudentPage";
 import NotFoundPage from "./component/404page/NotFoundPage";
-import React, { Suspense } from "react";
+import React, { Suspense, useContext } from "react";
+import AuthContext from "./context/auth/authContext";
+import AuthContextProvider from "./context/auth/authContext";
 const AddStudentPage = React.lazy(() => import("./pages/AddStudentPage"));
 
 function App() {
@@ -160,20 +162,28 @@ function App() {
   //     student.splice(index, 1);
   //     setStudents(student);
   //   };
-  // finish show student information
-
+  // finish show student information 
   return (
     <BrowserRouter>
-      <div className="App">
-        <Toolbar />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/add-student" element={<Suspense fallback={<div>...loading</div>}><AddStudentPage /></Suspense>} />
-          <Route path="students/:id" element={<EditStudentPage />} />
+      <AuthContextProvider>
+        <div className="App">
+          <Toolbar />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route
+              path="/add-student"
+              element={
+                <Suspense fallback={<div>...loading</div>}>
+                  <AddStudentPage />
+                </Suspense>
+              }
+            />
+            <Route path="students/:id" element={<EditStudentPage />} />
 
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </div>
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </div> 
+      </AuthContextProvider>
     </BrowserRouter>
   );
 }

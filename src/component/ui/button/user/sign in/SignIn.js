@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Button from "../../button";
 import "./SignIn.css";
+import { AuthContext } from "../../../../../context/auth/authContext";
 
 const SignIn = (props) => {
   const [cap1, setcap1] = useState()
@@ -15,6 +16,7 @@ const SignIn = (props) => {
   const [errorReport, setErrorReport] = useState()
   const [emailValue, setEmailValue] = useState('')
   const [passwordValue, setPasswordValue] = useState('')
+  const {login} = useContext(AuthContext)
   const createCaptcha = ()=>{
     const sample = 'abcdefghijklmnopqrstuvwxyz0123456789'
     setcap1(sample[Math.trunc(Math.random()*36)])
@@ -37,8 +39,6 @@ const SignIn = (props) => {
       return true
     }
     else{
-      console.log(emailpattern.test(emailValue))
-      console.log(passwordValue.length)
       return false
     }
   }
@@ -55,7 +55,9 @@ const SignIn = (props) => {
   const loginHandler = async()=>{
     setErrorReport('')
     const captcha = `${cap1}${cap2}${cap3}${cap4}`
-    if(captcha === captchaValue){
+    console.log(captcha)
+    console.log(captchaValue.toLowerCase())
+    if(captcha === captchaValue.toLowerCase()){
       const validateResult = validate()
       if(validateResult){
         try{
@@ -72,7 +74,7 @@ const SignIn = (props) => {
           })
           const data = await res.json()
           if (data === 'Data Matched'){
-            alert(data)
+            login()
             setEmailValue('')
             setPasswordValue('')
             setCaptchaValue('')

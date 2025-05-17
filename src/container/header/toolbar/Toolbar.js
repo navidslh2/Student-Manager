@@ -1,67 +1,63 @@
-import React,{useState} from "react";
-import './Toolbar.css'
+import React, { useContext, useEffect, useState } from "react";
+import "./Toolbar.css";
 import MenuItems from "../MenuItems/MenuItems";
 import Button from "../../../component/ui/button/button";
 import Modal from "../../../component/ui/button/modal/Modal";
 import SignIn from "../../../component/ui/button/user/sign in/SignIn";
 import SideDrawer from "../SideDrawer/SideDrawer";
 import Backdrop from "../../../component/ui/button/backdrop/Backdrop";
+import { AuthContext } from "../../../context/auth/authContext";
+const Toolbar = () => {
+  const [showModal, setShowModal] = useState(false);
+  const [showSideDrawer, setShowSideDrawer] = useState(false);
+  const authContext = useContext(AuthContext);
+  const {logout} = useContext(AuthContext)
+  const modalHandler = () => {
+    setShowModal(true);
+  };
+  const backdropClickHandler = () => {
+    setShowModal(false);
+  };
+  const sideDrawerHamdler = () => {
+    setShowSideDrawer(true);
+  };
+  const backdropClick = () => {
+    setShowSideDrawer(false);
+  };
+  const logoutHandler =()=>{
+    logout()
+  }
 
-const Toolbar = ()=>{
-    const [showModal,setShowModal] = useState(false)
-    const [showSideDrawer, setShowSideDrawer] = useState(false)
-    const modalHandler =()=>{
-        setShowModal(true)
-    }
-    const backdropClickHandler = ()=>{
-        setShowModal(false)
+  return (
+    <div className="Toolbar">
+      <Backdrop show={showSideDrawer} backdropClick={backdropClick} />
+      <SideDrawer open={showSideDrawer} />
+      <div className="hamberger">
+        <Button btnType="green" clicked={sideDrawerHamdler}>
+          <i class="fa-solid fa-bars"></i>
+        </Button>
+      </div>
 
-    }
-    const sideDrawerHamdler = ()=>{
-        setShowSideDrawer(true)
-    }
-    const backdropClick=()=>{
-        setShowSideDrawer(false)
-    }
+      <nav className="d-none d-lg-flex">
+        <MenuItems />
+      </nav>
+      <div className="d-none d-lg-flex">
+        {authContext.authenticated ? (
+          <Button btnType="red" clicked={logoutHandler}>
+            Logout
+          </Button>
+        ) : (
+          <Button btnType="red" clicked={modalHandler}>
+            Login/Sign up
+          </Button>
+        )}
+      </div>
 
-    return (
-        <div className="Toolbar">
-            <Backdrop 
-            show={showSideDrawer}
-            backdropClick={backdropClick}
-            />
-            <SideDrawer
-            open={showSideDrawer}
-            />
-            <div className="hamberger">
-                <Button
-                btnType="green"
-                clicked={sideDrawerHamdler}
-                >
-                    <i class="fa-solid fa-bars"></i>
-                </Button>
-            </div>
-            
-            <nav className="d-none d-lg-flex">
-                <MenuItems />
-            </nav>
-            <div className="d-none d-lg-flex">
-                <Button
-                btnType='red'
-                clicked={modalHandler}
-                >
-                    Login/Sign up
-                </Button>
-            </div>
+      <Modal backdropClick={backdropClickHandler} show={showModal}>
+        <SignIn show={showModal} />
+      </Modal>
+    </div>
+  );
+};
 
-            <Modal
-            backdropClick={backdropClickHandler}
-            show={showModal}
-            >
-                <SignIn show={showModal} />
-            </Modal>
-        </div>
-    )
-}
-
-export default React.memo(Toolbar)
+export default React.memo(Toolbar);
