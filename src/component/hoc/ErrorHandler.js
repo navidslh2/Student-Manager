@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Modal from "../ui/button/modal/Modal";
 
 const ErrorHandler = (WrappedComponent, axios) => {
-  const withHooksErrorHandler = (props) => {
+  const WithHooksErrorHandler = (props) => {
     const [show, setShow] = useState(false);
     const [error, setError] = useState('')
     axios.interceptors.request.use(
@@ -27,7 +27,7 @@ const ErrorHandler = (WrappedComponent, axios) => {
       </>
     );
   };
-  return withHooksErrorHandler 
+  return WithHooksErrorHandler 
 };
 
 export default ErrorHandler;

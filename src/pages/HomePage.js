@@ -1,52 +1,18 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import Toolbar from "../container/header/toolbar/Toolbar";
 import Search from "../component/ui/button/search/Search";
 import Button from "../component/ui/button/button";
 import Students from "../component/students/students";
 import { Route, useNavigate } from "react-router";
 import axios from "axios";
-import './style/Homepage.css'
+import "./style/Homepage.css";
 import Spinner from "../component/ui/button/spinner/spinner";
 import ErrorHandler from "../component/hoc/ErrorHandler";
+import ModalMessage from "../component/ui/button/modal/modalMessage/modalMessage";
+import { AuthContext } from "../context/auth/authContext";
 
 const HomePage = (props) => {
-  const [students, setStudents] = useState([
-    {
-      id: 1,
-      fullName: "Navid Salehi",
-      class: "a12",
-      phoneNumber: 1234,
-      email: "navidslh2@gmail.com",
-    },
-    {
-      id: 2,
-      fullName: "Nima Salehi",
-      class: "b13",
-      phoneNumber: 4567,
-      email: "navidslh3@gmail.com",
-    },
-    {
-      id: 3,
-      fullName: "reza akbari",
-      class: "c13",
-      phoneNumber: 7895,
-      email: "navidslh4@gmail.com",
-    },
-    {
-      id: 4,
-      fullName: "ali masoudi",
-      class: "d14",
-      phoneNumber: 15687,
-      email: "navidslh5@gmail.com",
-    },
-    {
-      id: 5,
-      fullName: "hamid sadeghi",
-      class: "b15",
-      phoneNumber: 46879,
-      email: "navidslh6@gmail.com",
-    },
-  ]);
+  const [students, setStudents] = useState([]);
   const inputEl = useRef(null);
   const scrollHandler = () => {
     const rect = inputEl.current.getBoundingClientRect();
@@ -57,14 +23,23 @@ const HomePage = (props) => {
   const [searchBarValue, setSearchBarValue] = useState("");
   const [arrayHolder, setArrayHolder] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showModalMessage, setShowModalMessage] = useState(false);
+  const { authenticated } = useContext(AuthContext);
   useEffect(() => {
     setLoading(true);
-    setArrayHolder(students);
     inputEl.current.focus();
-    axios.get("https://jsonplaceholder.ir/posts").then((response) => {
-      setStudents(response.data);
-      setLoading(false);
-    });
+    const fetchstudents = async () => {
+      try {
+        const res = await fetch("http://localhost/student/showstudent.php");
+        const data = await res.json();
+        setStudents(data);
+        setArrayHolder(data);
+        setLoading(false);
+      } catch (er) {
+        alert(er.message);
+      }
+    };
+    fetchstudents();
   }, []);
   const searchFilterFunction = (event) => {
     const searchData = event.target.value.toUpperCase();
@@ -132,8 +107,14 @@ const HomePage = (props) => {
   // finish show student information
   let navigate = useNavigate();
   const editStudentHandler = (id) => {
-    console.log(id);
-    navigate(`/students/${id}`);
+    if (authenticated) {
+      navigate(`/students/${id}`);
+    } else {
+      setShowModalMessage(true);
+      setTimeout(() => {
+        setShowModalMessage(false);
+      }, 4000);
+    }
   };
   return (
     <div className="Homepage">
@@ -146,8 +127,10 @@ const HomePage = (props) => {
       <Button btnType="blue" clicked={displayHandler}>
         Change display
       </Button>
-      {loading ? (<Spinner /> ) :
-       (<Students
+      {loading ? (
+        <Spinner />
+      ) : (
+        <Students
           studentList={students}
           nameChange={nameChangeHandler}
           classChange={classChangehandler}
@@ -161,6 +144,12 @@ const HomePage = (props) => {
       <Button btnType="blue" clicked={scrollHandler}>
         <i className="fa-solid fa-angle-up"></i>
       </Button>
+      {authenticated ? null : (
+        <ModalMessage ShowModalMessage={showModalMessage} color={'red'}>
+          <p>You don't have access to this page. </p>
+          <p>please log in to continue.</p>
+        </ModalMessage>
+      )}
     </div>
   );
 };

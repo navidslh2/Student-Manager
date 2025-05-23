@@ -7,11 +7,13 @@ import SignIn from "../../../component/ui/button/user/sign in/SignIn";
 import SideDrawer from "../SideDrawer/SideDrawer";
 import Backdrop from "../../../component/ui/button/backdrop/Backdrop";
 import { AuthContext } from "../../../context/auth/authContext";
+import { useNavigate } from "react-router";
 const Toolbar = () => {
   const [showModal, setShowModal] = useState(false);
   const [showSideDrawer, setShowSideDrawer] = useState(false);
   const authContext = useContext(AuthContext);
-  const {logout} = useContext(AuthContext)
+  const { dispatch } = useContext(AuthContext);
+  const navigate = useNavigate()
   const modalHandler = () => {
     setShowModal(true);
   };
@@ -24,10 +26,15 @@ const Toolbar = () => {
   const backdropClick = () => {
     setShowSideDrawer(false);
   };
-  const logoutHandler =()=>{
-    logout()
+  const logoutHandler = () => {
+    dispatch({type:'logout'})
+    navigate('/',{replace:true})
+  };
+  let auth = false
+  const userInfo = JSON.parse(localStorage.getItem('user'))
+  if(userInfo){
+    auth = true
   }
-
   return (
     <div className="Toolbar">
       <Backdrop show={showSideDrawer} backdropClick={backdropClick} />
@@ -42,7 +49,7 @@ const Toolbar = () => {
         <MenuItems />
       </nav>
       <div className="d-none d-lg-flex">
-        {authContext.authenticated ? (
+        {auth ? (
           <Button btnType="red" clicked={logoutHandler}>
             Logout
           </Button>

@@ -1,8 +1,18 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import Toolbar from "../container/header/toolbar/Toolbar";
 import NewStudent from "../component/students/newStudent/newStudent"
-import { Navigate } from "react-router-dom";
+import { Navigate, replace, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/auth/authContext";
 const AddStudentPage = (props) => {
+  const {authenticated} = useContext(AuthContext)
+  const navigate = useNavigate() 
+ 
+  useEffect(()=>{ 
+    const userInfo = JSON.parse(localStorage.getItem('user'))
+    if(!userInfo){
+      navigate('/',{replace:true})
+    }
+  },[authenticated])
   const [students, setStudents] = useState([
     {
       id: 1,
