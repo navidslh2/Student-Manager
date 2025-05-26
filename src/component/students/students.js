@@ -15,15 +15,15 @@ const Students = (props) =>{
                             <Student
                             id={student.id} 
                             name={student.fullName} 
-                            class={student.class} 
+                            classNumber={student.classNumber} 
                             phoneNumber={student.phoneNumber} 
                             email={student.email}
-                            nameChange={(event) => props.nameChange(event, student.id)}
-                            classChange={(event)=> props.classChange(event,student.id)}
-                            phoneChange={(event)=>{props.phoneChange(event,student.id)}}
-                            deleteStudent={()=>props.deleteStudent(index)}
-                            emailChange={(event)=>{props.emailChange(event, student.id)}}
-                            edit={()=>props.edit(student.id)}
+                            // nameChange={(event) => props.nameChange(event, student.id)}
+                            // classChange={(event)=> props.classChange(event,student.id)}
+                            // phoneChange={(event)=>{props.phoneChange(event,student.id)}}
+                            deleteStudent={()=>props.deleteStudent(student.id)}
+                            // emailChange={(event)=>{props.emailChange(event, student.id)}}
+                            edit={()=>props.edit(student.id, student.fullName, student.classNumber, student.phoneNumber, student.email)}
                         />
                         </ErrorBoundary>
                         )
@@ -41,15 +41,15 @@ const Students = (props) =>{
                     <Student  
                     id={student.id} 
                     name={student.fullName} 
-                    class={student.class} 
+                    classNumber={student.classNumber} 
                     phoneNumber={student.phoneNumber} 
                     email={student.email}
-                    nameChange={(event) => props.nameChange(event, student.id)}
-                    classChange={(event)=> props.classChange(event,student.id)}
-                    phoneChange={(event)=>{props.phoneChange(event,student.id)}}
-                    deleteStudent={()=>props.deleteStudent(index)}
-                    emailChange={(event)=>{props.emailChange(event, student.id)}}
-                     edit={()=>props.edit(student.id)}
+                    // nameChange={(event) => props.nameChange(event, student.id)}
+                    // classChange={(event)=> props.classChange(event,student.id)}
+                    // phoneChange={(event)=>{props.phoneChange(event,student.id)}}
+                    deleteStudent={()=>props.deleteStudent(student.id)}
+                    // emailChange={(event)=>{props.emailChange(event, student.id)}}
+                    edit={()=>props.edit(student.id, student.fullName, student.classNumber, student.phoneNumber, student.email)}
                     />
                 </ErrorBoundary>
             )

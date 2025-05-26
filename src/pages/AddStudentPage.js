@@ -1,55 +1,19 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import Toolbar from "../container/header/toolbar/Toolbar";
-import NewStudent from "../component/students/newStudent/newStudent"
+import NewStudent from "../component/students/newStudent/newStudent";
 import { Navigate, replace, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth/authContext";
 const AddStudentPage = (props) => {
-  const {authenticated} = useContext(AuthContext)
-  const navigate = useNavigate() 
- 
-  useEffect(()=>{ 
-    const userInfo = JSON.parse(localStorage.getItem('user'))
-    if(!userInfo){
-      navigate('/',{replace:true})
+  const { authenticated } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const userInfo = JSON.parse(localStorage.getItem("user"));
+    if (!userInfo) {
+      navigate("/", { replace: true });
     }
-  },[authenticated])
-  const [students, setStudents] = useState([
-    {
-      id: 1,
-      fullName: "Navid Salehi",
-      class: "a12",
-      phoneNumber: 1234,
-      email: "`navidslh2@gmail.com`",
-    },
-    {
-      id: 2,
-      fullName: "Nima Salehi",
-      class: "b13",
-      phoneNumber: 4567,
-      email: "navidslh3@gmail.com",
-    },
-    {
-      id: 3,
-      fullName: "reza akbari",
-      class: "c13",
-      phoneNumber: 7895,
-      email: "navidslh4@gmail.com",
-    },
-    {
-      id: 4,
-      fullName: "ali masoudi",
-      class: "d14",
-      phoneNumber: 15687,
-      email: "navidslh5@gmail.com",
-    },
-    {
-      id: 5,
-      fullName: "hamid sadeghi",
-      class: "b15",
-      phoneNumber: 46879,
-      email: "navidslh6@gmail.com",
-    },
-  ]);
+  }, [authenticated]);
+
   // start add student
   const [studentName, setStudentName] = useState("");
   const [studentClass, setStudentClass] = useState("");
@@ -67,32 +31,38 @@ const AddStudentPage = (props) => {
   const newStudentEmailhandler = (event) => {
     setStudentEmail(event.target.value);
   };
-   const [result, setResult] = useState(false)
-  const addStudentHandler = () => {
-    setResult(true)
-    const newStudent = {};
+  const [result, setResult] = useState(false);
+  const addStudentHandler = async () => {
+    setResult(true);
     if (
       studentName !== "" &&
       studentClass !== "" &&
       studentPhone !== "" &&
       studentEmail !== ""
     ) {
-      newStudent.id = students.length + 1;
-      newStudent.fullName = studentName;
-      newStudent.class = studentClass;
-      newStudent.phoneNumber = studentPhone;
-      newStudent.email = studentEmail;
+      try {
+        const res = await fetch("http://localhost/student/insertstudent.php", {
+          method: "POST",
+          headers: {
+            "Accept": "application/json",
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            fullname: studentName,
+            classNumber: studentClass,
+            phone: studentPhone,
+            email: studentEmail,
+          }),
+        });
+        const data = res.json();
+        console.log(data)
+      } catch (error) {
+        alert(error.message);
+      }
     } else alert("fill in all");
-    const newStudents = [...students];
-    newStudents.push(newStudent);
-    setStudents(newStudents);
-    setStudentName("");
-    setStudentClass("");
-    setStudentPhone("");
-    setStudentEmail("");
   };
-  if(result){
-    return <Navigate to='/' replace />
+  if (result) {
+    return <Navigate to="/" replace />;
   }
   // finish add student
   return (

@@ -80,7 +80,7 @@ const SignIn = (props) => {
           const res = await fetch("http://localhost/student/user_login.php", {
             method: "POST",
             headers: {
-              Accept: "application/json",
+              'Accept': "application/json",
               "Content-Type": "application/json",
             },
             body: JSON.stringify({

@@ -1,4 +1,5 @@
-import React from "react";
+
+import { createPortal } from 'react-dom';
 import './modalMessage.css'
 
 const ModalMessage = (props)=>{
@@ -16,10 +17,11 @@ const ModalMessage = (props)=>{
         default:
             break
     }
-    return(
+    return createPortal(
         <div className={classes.join(' ')}>
             {props.children}
-        </div>
+        </div>,
+        document.body
     )
 }
 

@@ -45,7 +45,7 @@ const Student = (props) => {
 
       </div>
       <div className="input-wrapper">
-        <label>Class :<span>{props.class}</span></label>
+        <label>Class :<span>{props.classNumber}</span></label>
       </div>
       <div className="input-wrapper">
         <label>Phone Number :<span>{props.phoneNumber}</span></label>
@@ -72,7 +72,7 @@ Student.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   nameChange: PropTypes.func.isRequired,
-  class: PropTypes.string.isRequired,
+  classNumber: PropTypes.string.isRequired,
   classChange: PropTypes.func.isRequired,
   phoneNumber: PropTypes.number.isRequired,
   phoneChange: PropTypes.func.isRequired,
