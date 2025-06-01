@@ -1,7 +1,6 @@
-import React, {useEffect} from "react";
+import React from "react";
 import classes from './newStudent.module.css'
 import Button from "../../ui/button/button";
-import PropTypes from "prop-types";
 import Wrapper from "../../hoc/Wrapper";
 import WithClass from "../../hoc/WithClass";
  
@@ -43,14 +42,3 @@ const NewStudent = (props)=>{
 
 export default React.memo(WithClass(NewStudent,classes.newStudents))
 
-NewStudent.propsTypes = {
-    studentName:PropTypes.string.isRequired,
-    studentClass:PropTypes.string.isRequired,
-    studentPhone:PropTypes.number.isRequired,
-    studentEmail:PropTypes.string.isRequired,
-    newStudentName:PropTypes.func.isRequired,
-    newStudentClass:PropTypes.func.isRequired,
-    newStudentPhone:PropTypes.func.isRequired,
-    newStudentEmail:PropTypes.func.isRequired,
-    addStudent:PropTypes.func.isRequired
-}

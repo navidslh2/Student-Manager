@@ -11,10 +11,11 @@ import ErrorHandler from "../component/hoc/ErrorHandler";
 import ModalMessage from "../component/ui/button/modal/modalMessage/modalMessage";
 import { AuthContext } from "../context/auth/authContext";
 import { StudentContext } from "../context/students/studentContext";
+import useStudents from "../hooks/useStudent";
 
 const HomePage = (props) => {
   const { students, dispatch } = useContext(StudentContext);
-  // const [students, setStudents] = useState([]);
+
   const inputEl = useRef(null);
   const scrollHandler = () => {
     const rect = inputEl.current.getBoundingClientRect();
@@ -23,26 +24,27 @@ const HomePage = (props) => {
   };
   // start search
   const [searchBarValue, setSearchBarValue] = useState("");
-  const [arrayHolder, setArrayHolder] = useState("");
-  const [loading, setLoading] = useState(false);
+  // const [arrayHolder, setArrayHolder] = useState("");
+  // const [loading, setLoading] = useState(false);
   const [showModalMessage, setShowModalMessage] = useState(false);
   const { authenticated } = useContext(AuthContext);
-  useEffect(() => {
-    setLoading(true);
-    inputEl.current.focus();
-    const fetchstudents = async () => {
-      try {
-        const res = await fetch("http://localhost/student/showstudent.php");
-        const data = await res.json();
-        dispatch({ type: "fetch", payload: data });
-        setArrayHolder(data);
-        setLoading(false);
-      } catch (er) {
-        alert(er.message);
-      }
-    };
-    fetchstudents();
-  }, []);
+  const {loading, arrayHolder, setArrayHolder} = useStudents(dispatch)
+  // useEffect(() => {
+  //   setLoading(true);
+  //   inputEl.current.focus();
+  //   const fetchstudents = async () => {
+  //     try {
+  //       const res = await fetch("http://localhost/student/showstudent.php");
+  //       const data = await res.json();
+  //       dispatch({ type: "fetch", payload: data });
+  //       setArrayHolder(data);
+  //       setLoading(false);
+  //     } catch (er) {
+  //       alert(er.message);
+  //     }
+  //   };
+  //   fetchstudents();
+  // }, []);
   const searchFilterFunction = (event) => {
     const searchData = event.target.value.toUpperCase();
     const search = arrayHolder.filter((item) => {
@@ -58,49 +60,7 @@ const HomePage = (props) => {
   const displayHandler = () => {
     setToggle(!toggle);
   };
-  // finish change display
-  // start show student information
-
-  // const nameChangeHandler = (event, id) => {
-  //   const studentIndex = students.findIndex((elem) => {
-  //     return elem.id == id;
-  //   });
-  //   const studentChanged = { ...students[studentIndex] };
-  //   studentChanged.fullName = event.target.value;
-  //   const student = [...students];
-  //   student[studentIndex] = studentChanged;
-  //   setStudents(student);
-  // };
-  // const classChangehandler = (event, id) => {
-  //   const studentIndex = students.findIndex((elem) => {
-  //     return elem.id === id;
-  //   });
-  //   const studentChanged = { ...students[studentIndex] };
-  //   studentChanged.class = event.target.value;
-  //   const student = [...students];
-  //   student[studentIndex] = studentChanged;
-  //   setStudents(student);
-  // };
-  // const phoneChangehandler = (event, id) => {
-  //   const studentIndex = students.findIndex((elem) => {
-  //     return elem.id == id;
-  //   });
-  //   const studentChanged = { ...students[studentIndex] };
-  //   studentChanged.phoneNumber = event.target.value;
-  //   const student = [...students];
-  //   student[studentIndex] = studentChanged;
-  //   setStudents(student);
-  // };
-  // const emailChangeHandler = (event, id) => {
-  //   const studentIndex = students.findIndex(() => {
-  //     return (students.id = id);
-  //   });
-  //   const studentChanged = { ...students[studentIndex] };
-  //   studentChanged.email = event.target.value;
-  //   const student = [...students];
-  //   student[studentIndex] = studentChanged;
-  //   setStudents(student);
-  // };
+ 
   let auth = false;
   const userInfo = JSON.parse(localStorage.getItem("user"));
   if (userInfo) {
@@ -131,9 +91,7 @@ const HomePage = (props) => {
         setShowModalMessage(false);
       }, 4000);
     }
-    // const student = [...students];
-    // student.splice(index, 1);
-    // setStudents(student);
+
   };
   // finish show student information
   let navigate = useNavigate();
@@ -171,12 +129,9 @@ const HomePage = (props) => {
       ) : (
         <Students
           studentList={students}
-          // nameChange={nameChangeHandler}
-          // classChange={classChangehandler}
           deleteStudent={deleteStudenthandler}
           display={toggle}
-          // phoneChange={phoneChangehandler}
-          // emailChange={emailChangeHandler}
+
           edit={editStudentHandler}
         />
       )}
