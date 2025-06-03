@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Button from "../../button";
 import "./SignIn.css";
 import { AuthContext } from "../../../../../context/auth/authContext";
+import useLogin from "../../../../../hooks/useLogin";
 
 const SignIn = (props) => {
   const [cap1, setcap1] = useState();
@@ -17,6 +18,7 @@ const SignIn = (props) => {
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const { dispatch } = useContext(AuthContext);
+  const { login } = useLogin();
   const createCaptcha = () => {
     const sample = "abcdefghijklmnopqrstuvwxyz0123456789";
     setcap1(sample[Math.trunc(Math.random() * 36)]);
@@ -62,7 +64,7 @@ const SignIn = (props) => {
     }
   };
   const emailChangeHandler = (event) => {
-    setEmailValue((event.target.value).trim());
+    setEmailValue(event.target.value.trim());
   };
   const passwordChangeHandler = (event) => {
     setPasswordValue(event.target.value);
@@ -70,36 +72,21 @@ const SignIn = (props) => {
   const captchaHandler = (event) => {
     setCaptchaValue(event.target.value);
   };
-  const loginHandler = async () => {
+  const loginHandler =  async() => {
     setErrorReport("");
     const captcha = `${cap1}${cap2}${cap3}${cap4}`;
     if (captcha === captchaValue.toLowerCase()) {
       const validateResult = validate();
       if (validateResult) {
-        try {
-          const res = await fetch("http://localhost/student/user_login.php", {
-            method: "POST",
-            headers: {
-              'Accept': "application/json",
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              email: emailValue,
-              password: passwordValue,
-            }),
-          });
-          const data = await res.json();
-          if (data === "Data Matched") {
-            dispatch({type:'login',payload: emailValue})
-            setEmailValue("");
-            setPasswordValue("");
-            setCaptchaValue("");
-          } else {
-            setErrorReport(data);
-            setCaptchaValue("");
-          }
-        } catch (error) {
-          alert(error.message);
+        const result = await login(emailValue, passwordValue);
+        if (result === "Data Matched") {
+          dispatch({ type: "login", payload: emailValue });
+          setEmailValue("");
+          setPasswordValue("");
+          setCaptchaValue("");
+        } else {
+          setErrorReport(result);
+          setCaptchaValue("");
         }
       } else {
         setErrorReport("email or password is invalid");

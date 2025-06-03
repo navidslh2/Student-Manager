@@ -45,10 +45,6 @@ const Modal =(props)=>{
                     </motion.div>
                 ):null}
             </AnimatePresence>
-            {/* <div className={classes.join(" ")}>
-                
-            </div> */}
-
         </React.Fragment>
     )
 }

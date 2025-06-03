@@ -15,8 +15,3 @@ const MenuItem =(props)=>{
 }
 
 export default React.memo(MenuItem)
-
-MenuItem.propTypes ={ 
-    link:PropTypes.string.isRequired,
-    children:PropTypes.string.isRequired
-}

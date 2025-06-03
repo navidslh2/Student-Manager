@@ -30,11 +30,19 @@ const Toolbar = () => {
     dispatch({type:'logout'})
     navigate('/',{replace:true})
   };
-  let auth = false
+    let auth = false
   const userInfo = JSON.parse(localStorage.getItem('user'))
-  if(userInfo){
+    if(userInfo){
     auth = true
+    // setShowModal(false)
   }
+  useEffect(()=>{
+    if(auth){
+      setShowModal(false)
+    }
+  },[auth])
+
+
   return (
     <div className="Toolbar">
       <Backdrop show={showSideDrawer} backdropClick={backdropClick} />

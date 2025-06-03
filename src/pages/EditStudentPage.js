@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./style/EditStudentPage.css";
-import Button from "../component/ui/button/button";
 import { useLocation, useNavigate, useParams } from "react-router";
 import { AuthContext } from "../context/auth/authContext";
-import { StudentContext } from "../context/students/studentContext";
 import ModalMessage from "../component/ui/button/modal/modalMessage/modalMessage";
+import useEditStudent from "../hooks/useEditStudent";
+import EditStudents from "../component/students/editStudent/editStudent";
 
-const EditStudentPage = (props) => {
+const EditStudentPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
@@ -18,6 +18,7 @@ const EditStudentPage = (props) => {
   const [studentEmail, setStudentEmail] = useState(email);
   const [edit, setEdit] = useState();
   const [showModalMessage, setShowModalMessage] = useState(false);
+  const {editstudent} = useEditStudent()
   const fullNameChangeHandler = (event) => {
     setStudnetName(event.target.value);
   };
@@ -39,83 +40,35 @@ const EditStudentPage = (props) => {
     setShowModalMessage(false);
   }, [authenticated]);
   const editHandler = async () => {
-    try {
-      const res = await fetch("http://localhost/student/updatestudent.php", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          id: id,
-          fullname: studnetName,
-          classNumber: studnetClassNumber,
-          phone: studentphoneNumber,
-          email: studentEmail,
-        }),
-      });
-      const data = await res.json();
+    const data = await editstudent(id, studnetName, studnetClassNumber, studentphoneNumber, studentEmail)
       if (data === "information was successfully update") {
         setEdit(true);
         setShowModalMessage(true);
         setTimeout(() => {
           navigate("/", { replace: true });
           setShowModalMessage(false);
-        }, 4000);
+        }, 3000);
       } else {
         setEdit(false);
         setShowModalMessage(true);
         setTimeout(() => {
           setShowModalMessage(false);
-        }, 4000);
+        }, 3000);
       }
-    } catch (error) {
-      alert(error.message);
-      setEdit(false);
-      setShowModalMessage(true);
-      setTimeout(() => {
-        setShowModalMessage(false);
-      }, 4000);
-    }
   };
   return (
-    <div className="newStudents">
-      <h2>Edit Student</h2>
-      <div className="input-wrapper">
-        <label>Full Name :</label>
-        <input
-          type="text"
-          value={studnetName}
-          onChange={fullNameChangeHandler}
-        />
-      </div>
-      <div className="input-wrapper">
-        <label>Class :</label>
-        <input
-          type="text"
-          value={studnetClassNumber}
-          onChange={ClassChangeHandler}
-        />
-      </div>
-      <div className="input-wrapper">
-        <label>Phone Number :</label>
-        <input
-          type="number"
-          value={studentphoneNumber}
-          onChange={phoneChangeHandler}
-        />
-      </div>
-      <div className="input-wrapper">
-        <label>Email :</label>
-        <input
-          type="email"
-          value={studentEmail}
-          onChange={emailChangeHandler}
-        />
-      </div>
-      <Button btnType="green" clicked={editHandler}>
-        Edit
-      </Button>
+    <React.Fragment>
+      <EditStudents 
+      studnetName={studnetName}
+      fullNameChangeHandler={fullNameChangeHandler}
+      studnetClassNumber={studnetClassNumber}
+      ClassChangeHandler={ClassChangeHandler}
+      studentphoneNumber={studentphoneNumber}
+      phoneChangeHandler={phoneChangeHandler}
+      studentEmail={studentEmail}
+      emailChangeHandler={emailChangeHandler}
+      editHandler={editHandler}
+      />
       {edit ? (
         <ModalMessage color={"green"} ShowModalMessage={showModalMessage}>
           <p>student's information was successfully update.</p>
@@ -127,7 +80,7 @@ const EditStudentPage = (props) => {
           <p>was not successfully update</p>
         </ModalMessage>
       )}
-    </div>
+    </React.Fragment>
   );
 };
 

@@ -3,7 +3,7 @@ import Toolbar from "../container/header/toolbar/Toolbar";
 import Search from "../component/ui/button/search/Search";
 import Button from "../component/ui/button/button";
 import Students from "../component/students/students";
-import { Route, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./style/Homepage.css";
 import Spinner from "../component/ui/button/spinner/spinner";
@@ -12,10 +12,11 @@ import ModalMessage from "../component/ui/button/modal/modalMessage/modalMessage
 import { AuthContext } from "../context/auth/authContext";
 import { StudentContext } from "../context/students/studentContext";
 import useStudents from "../hooks/useStudent";
+import useDeleteStudent from "../hooks/deleteStudent";
 
 const HomePage = (props) => {
   const { students, dispatch } = useContext(StudentContext);
-
+  const {deleteStudent} = useDeleteStudent()
   const inputEl = useRef(null);
   const scrollHandler = () => {
     const rect = inputEl.current.getBoundingClientRect();
@@ -24,27 +25,9 @@ const HomePage = (props) => {
   };
   // start search
   const [searchBarValue, setSearchBarValue] = useState("");
-  // const [arrayHolder, setArrayHolder] = useState("");
-  // const [loading, setLoading] = useState(false);
   const [showModalMessage, setShowModalMessage] = useState(false);
   const { authenticated } = useContext(AuthContext);
-  const {loading, arrayHolder, setArrayHolder} = useStudents(dispatch)
-  // useEffect(() => {
-  //   setLoading(true);
-  //   inputEl.current.focus();
-  //   const fetchstudents = async () => {
-  //     try {
-  //       const res = await fetch("http://localhost/student/showstudent.php");
-  //       const data = await res.json();
-  //       dispatch({ type: "fetch", payload: data });
-  //       setArrayHolder(data);
-  //       setLoading(false);
-  //     } catch (er) {
-  //       alert(er.message);
-  //     }
-  //   };
-  //   fetchstudents();
-  // }, []);
+  const {loading, arrayHolder,setArrayHolder } = useStudents(dispatch)
   const searchFilterFunction = (event) => {
     const searchData = event.target.value.toUpperCase();
     const search = arrayHolder.filter((item) => {
@@ -68,22 +51,7 @@ const HomePage = (props) => {
   } else auth = false;
   const deleteStudenthandler = async (id) => {
     if (auth) {
-      try {
-        const res = await fetch("http://localhost/student/deletestudent.php", {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify({
-            id: id,
-          }),
-        });
-        const data = await res.json();
-        console.log(data);
-      } catch (error) {
-        alert(error.message);
-      }
+      await deleteStudent(id)
       dispatch({ type: "delete", id: id });
     } else {
       setShowModalMessage(true);
@@ -131,7 +99,6 @@ const HomePage = (props) => {
           studentList={students}
           deleteStudent={deleteStudenthandler}
           display={toggle}
-
           edit={editStudentHandler}
         />
       )}

@@ -33,7 +33,6 @@ const AddStudentPage = (props) => {
   };
   const [result, setResult] = useState(false);
   const addStudentHandler = async () => {
-    setResult(true);
     if (
       studentName !== "" &&
       studentClass !== "" &&
@@ -44,7 +43,7 @@ const AddStudentPage = (props) => {
         const res = await fetch("http://localhost/student/insertstudent.php", {
           method: "POST",
           headers: {
-            "Accept": "application/json",
+            Accept: "application/json",
             "Content-type": "application/json",
           },
           body: JSON.stringify({
@@ -55,7 +54,8 @@ const AddStudentPage = (props) => {
           }),
         });
         const data = res.json();
-        console.log(data)
+        console.log(data);
+        setResult(true);
       } catch (error) {
         alert(error.message);
       }
