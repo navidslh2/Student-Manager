@@ -1,5 +1,5 @@
 MenuItem {
-    height: 50px;
+    height: 60px;
     margin: 0;
     box-sizing: border-box;
     display: flex;
@@ -7,7 +7,7 @@ MenuItem {
 }
 .MenuItem a {
     height: 100%;
-    line-height: 50px;
+    line-height: 60px;
     text-decoration: none;
     display: flex;
     transition: all 0.3s ease-in-out;

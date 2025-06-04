@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import "./style/EditStudentPage.css";
 import { useLocation, useNavigate, useParams } from "react-router";
 import { AuthContext } from "../context/auth/authContext";
 import ModalMessage from "../component/ui/button/modal/modalMessage/modalMessage";

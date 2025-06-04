@@ -45,6 +45,7 @@
     ]
   },
   "devDependencies": {
+    "jest-fetch-mock": "^3.0.3",
     "sass": "^1.87.0"
   }
 }
