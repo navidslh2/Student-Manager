@@ -1,6 +1,6 @@
 import React from "react";
 import './Modal.css'
-import Backdrop from "../backdrop/Backdrop";
+import Backdrop from "../../ui/backdrop/Backdrop";
 import { AnimatePresence, motion } from "framer-motion";
 
 const dropin = {

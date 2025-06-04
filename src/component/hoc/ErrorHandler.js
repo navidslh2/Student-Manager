@@ -1,5 +1,5 @@
 import  { useState } from "react";
-import Modal from "../ui/button/modal/Modal";
+import Modal from "../ui/modal/Modal";
 
 const ErrorHandler = (WrappedComponent, axios) => {
   const WithHooksErrorHandler = (props) => {

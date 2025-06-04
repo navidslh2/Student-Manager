@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import Toolbar from "../container/header/toolbar/Toolbar";
-import Search from "../component/ui/button/search/Search";
+import Search from "../component/ui/search/Search";
 import Button from "../component/ui/button/button";
 import Students from "../component/students/students";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./style/Homepage.css";
-import Spinner from "../component/ui/button/spinner/spinner";
 import ErrorHandler from "../component/hoc/ErrorHandler";
-import ModalMessage from "../component/ui/button/modal/modalMessage/modalMessage";
+import ModalMessage from "../component/ui/modalMessage/modalMessage";
 import { AuthContext } from "../context/auth/authContext";
 import { StudentContext } from "../context/students/studentContext";
 import useStudents from "../hooks/useStudent";
 import useDeleteStudent from "../hooks/deleteStudent";
+import Spinner from "../component/ui/spinner/spinner";
 
 const HomePage = (props) => {
   const { students, dispatch } = useContext(StudentContext);

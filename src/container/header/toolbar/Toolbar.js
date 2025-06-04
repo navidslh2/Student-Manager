@@ -2,20 +2,25 @@ import React, { useContext, useEffect, useState } from "react";
 import "./Toolbar.css";
 import MenuItems from "../MenuItems/MenuItems";
 import Button from "../../../component/ui/button/button";
-import Modal from "../../../component/ui/button/modal/Modal";
-import SignIn from "../../../component/ui/button/user/sign in/SignIn";
+import Modal from "../../../component/ui/modal/Modal";
 import SideDrawer from "../SideDrawer/SideDrawer";
-import Backdrop from "../../../component/ui/button/backdrop/Backdrop";
+import Backdrop from "../../../component/ui/backdrop/Backdrop";
 import { AuthContext } from "../../../context/auth/authContext";
 import { useNavigate } from "react-router";
+import Login from "../../../component/user/Login/Login";
+import Signin from "../../../component/user/signin/Signin";
+
+
 const Toolbar = () => {
   const [showModal, setShowModal] = useState(false);
   const [showSideDrawer, setShowSideDrawer] = useState(false);
   const authContext = useContext(AuthContext);
   const { dispatch } = useContext(AuthContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [showLogin, setShowLogin] = useState(true);
   const modalHandler = () => {
     setShowModal(true);
+    setShowLogin(true)
   };
   const backdropClickHandler = () => {
     setShowModal(false);
@@ -27,21 +32,23 @@ const Toolbar = () => {
     setShowSideDrawer(false);
   };
   const logoutHandler = () => {
-    dispatch({type:'logout'})
-    navigate('/',{replace:true})
+    dispatch({ type: "logout" });
+    navigate("/", { replace: true });
   };
-    let auth = false
-  const userInfo = JSON.parse(localStorage.getItem('user'))
-    if(userInfo){
-    auth = true
+  const showLoginHandler = ()=>{
+    setShowLogin(false)
+  }
+  let auth = false;
+  const userInfo = JSON.parse(localStorage.getItem("user"));
+  if (userInfo) {
+    auth = true;
     // setShowModal(false)
   }
-  useEffect(()=>{
-    if(auth){
-      setShowModal(false)
+  useEffect(() => {
+    if (auth) {
+      setShowModal(false);
     }
-  },[auth])
-
+  }, [auth]);
 
   return (
     <div className="Toolbar">
@@ -69,7 +76,9 @@ const Toolbar = () => {
       </div>
 
       <Modal backdropClick={backdropClickHandler} show={showModal}>
-        <SignIn show={showModal} />
+        {showLogin?(<Login show={showModal} showLoginHandler={showLoginHandler}/>):
+        (<Signin />)}
+
       </Modal>
     </div>
   );
