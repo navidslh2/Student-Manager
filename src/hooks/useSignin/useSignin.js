@@ -14,6 +14,7 @@ const UseSignin = () => {
         }),
       });
       const data = await res.json("");
+      return data
     } catch (error) {
         alert(error.massege)
     }

@@ -13,12 +13,12 @@ const Students = (props) =>{
                         <ErrorBoundary key={index} >
                             <Student
                             id={student.id} 
-                            name={student.fullName} 
-                            classNumber={student.classNumber} 
-                            phoneNumber={student.phoneNumber} 
-                            email={student.email}
+                            name={student.student_name} 
+                            classNumber={student.student_class} 
+                            phoneNumber={student.studeny_phone_number} 
+                            email={student.student_email}
                             deleteStudent={()=>props.deleteStudent(student.id)}
-                            edit={()=>props.edit(student.id, student.fullName, student.classNumber, student.phoneNumber, student.email)}
+                            edit={()=>props.edit(student.id, student.student_name, student.student_class, student.studeny_phone_number, student.student_email)}
                         />
                         </ErrorBoundary>
                         )
@@ -35,12 +35,12 @@ const Students = (props) =>{
                 <ErrorBoundary key={index}>
                     <Student  
                     id={student.id} 
-                    name={student.fullName} 
-                    classNumber={student.classNumber} 
-                    phoneNumber={student.phoneNumber} 
-                    email={student.email}
+                    name={student.student_name} 
+                    classNumber={student.student_class} 
+                    phoneNumber={student.studeny_phone_number} 
+                    email={student.student_email}
                     deleteStudent={()=>props.deleteStudent(student.id)}
-                    edit={()=>props.edit(student.id, student.fullName, student.classNumber, student.phoneNumber, student.email)}
+                    edit={()=>props.edit(student.id, student.student_name, student.student_class, student.studeny_phone_number, student.student_email)}
                     />
                 </ErrorBoundary>
             )

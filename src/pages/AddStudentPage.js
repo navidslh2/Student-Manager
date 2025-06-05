@@ -3,8 +3,10 @@ import Toolbar from "../container/header/toolbar/Toolbar";
 import NewStudent from "../component/students/newStudent/newStudent";
 import { Navigate, replace, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth/authContext";
+import UseAddStudent from "../hooks/useAddStudent/useAddStudent";
 const AddStudentPage = (props) => {
   const { authenticated } = useContext(AuthContext);
+  const {addStudent} = UseAddStudent()
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -39,25 +41,9 @@ const AddStudentPage = (props) => {
       studentPhone !== "" &&
       studentEmail !== ""
     ) {
-      try {
-        const res = await fetch("http://localhost/student/insertstudent.php", {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify({
-            fullname: studentName,
-            classNumber: studentClass,
-            phone: studentPhone,
-            email: studentEmail,
-          }),
-        });
-        const data = res.json();
-        console.log(data);
-        setResult(true);
-      } catch (error) {
-        alert(error.message);
+      const data= await addStudent(studentName, studentClass, studentPhone, studentEmail)
+      if (data === "student was successfully added"){
+            setResult(true);
       }
     } else alert("fill in all");
   };

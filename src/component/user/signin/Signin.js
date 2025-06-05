@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Captcha from "../../ui/captcha/Captcha";
 import Button from "../../ui/button/button";
-import UseSignin from "../../../hooks/useSignin";
+import UseSignin from "../../../hooks/useSignin/useSignin";
+import { AuthContext } from "../../../context/auth/authContext";
 
 const Signin = () => {
   const [captchaValue, setCaptchaValue] = useState("");
@@ -10,9 +11,10 @@ const Signin = () => {
   const [signinNameValue, setSigninNameValue] = useState("");
   const [signinEmailValue, setSigninEmailValue] = useState("");
   const [signinPasswordValue, setSigninPasswordValue] = useState("");
-  const [signinConfirmPasswordValue, setSigninConfirmPasswordValue] =
-    useState("");
+  const [signinConfirmPasswordValue, setSigninConfirmPasswordValue] = useState("");
   const {signin} = UseSignin()
+  const [captchaChange, setCaptchaChange] = useState(false)
+  const {dispatch} = useContext(AuthContext)
   const signinNameChangeHandler = (event) => {
     setSigninNameValue(event.target.value);
   };
@@ -25,17 +27,12 @@ const Signin = () => {
   const signinConfirmPasswordChangeHandler = (event) => {
     setSigninConfirmPasswordValue(event.target.value);
   };
-  const signinHandler = () => {
+  const signinHandler = async () => {
+   setCaptchaChange(!captchaChange)
     setErrorReport([]);
     const error = [];
     const validate = () => {
-      console.log(signinPasswordValue)
-      if (
-        signinNameValue !== "" &&
-        signinEmailValue !== "" &&
-        signinPasswordValue !== "" &&
-        signinConfirmPasswordValue !== ""
-      ) {
+      if (signinNameValue !== "" && signinEmailValue !== "" && signinPasswordValue !== "" && signinConfirmPasswordValue !== "") {
         if (captcha === captchaValue) {
           const emailpattern =
             /^([a-zA-z0-9\.-]+)@([a-z0-9]+).([a-z]{2,5})(.[a-z]{2,5})?$/;
@@ -43,59 +40,48 @@ const Signin = () => {
           const passwordPattern = /^(?=.*[a-z])(?=.*\d).{8,}$/i;
           if (!namePattern.test(signinNameValue)) {
             error.push("Please enter a valid full name");
-            return(false)
           }
           if (!emailpattern.test(signinEmailValue)) {
             error.push("Please enter a valid email");
-            return(false)
           }
           if (signinPasswordValue.length < 8) {
             error.push("The password must be more than 7 characters.");
-            return(false)
           }
           if (!passwordPattern.test(signinPasswordValue)) {
             error.push("Password must be include both letters and numbers");
-            return(false)
           }
           if (signinPasswordValue !== signinConfirmPasswordValue) {
             error.push("Passwords do not match");
+            setErrorReport(error);
             return(false)
           }
         }else{
           error.push("captcha invalid");
+          setErrorReport(error);
           return(false)
         }
       } else {
         error.push("Please fill in all the fields");
+        setErrorReport(error);
         return(false)
       }
       return(true)
-      setErrorReport(error);
-      console.log(errorReport);
+      
     };
     validate();
     if(validate){
-      const data = signin(signinNameValue, signinEmailValue, signinPasswordValue)
+      const data = await signin(signinNameValue, signinEmailValue, signinPasswordValue)
+      if (data === "information was successfully added"){
+        dispatch({ type: "login", payload: signinEmailValue });
+        setErrorReport([])
+        setSigninNameValue("")
+        setSigninEmailValue("")
+        setSigninPasswordValue("")
+        setSigninConfirmPasswordValue("")
+        
+      }
     }
-
     if (captcha === captchaValue.toLowerCase()) {
-      //   const validateResult = validate();
-      //   if (validateResult) {
-      //     const result = await login(emailValue, passwordValue);
-      //     if (result === "Data Matched") {
-      //       dispatch({ type: "login", payload: emailValue });
-      //       setEmailValue("");
-      //       setPasswordValue("");
-      //       setCaptchaValue("");
-      //     } else {
-      //       setErrorReport(result);
-      //       setCaptchaValue("");
-      //     }
-      //   } else {
-      //     setErrorReport("email or password is invalid");
-      //   }
-      // } else {
-      //   setErrorReport("captcha invalid");
     }
     setCaptchaValue("");
     setCaptcha("");
@@ -143,15 +129,10 @@ const Signin = () => {
           value={signinConfirmPasswordValue}
         />
       </div>
-      <Captcha oncaptchaValue={setCaptchaValue} onCaptcha={setCaptcha} />
+      <Captcha oncaptchaValue={setCaptchaValue} onCaptcha={setCaptcha} captchaChange={captchaChange} />
       <Button btnType="green" clicked={signinHandler}>
         Signin
       </Button>
-      {/* <div>
-        Don't have an account?{" "}
-        <span onClick={props.showLoginHandler}>Sign in</span>
-      </div> */}
-      {/* <Captcha /> */}
     </>
   );
 };

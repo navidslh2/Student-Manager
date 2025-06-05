@@ -10,8 +10,8 @@ import ErrorHandler from "../component/hoc/ErrorHandler";
 import ModalMessage from "../component/ui/modalMessage/modalMessage";
 import { AuthContext } from "../context/auth/authContext";
 import { StudentContext } from "../context/students/studentContext";
-import useStudents from "../hooks/useStudent";
-import useDeleteStudent from "../hooks/deleteStudent";
+import useStudents from "../hooks/useStudent/useStudent";
+import useDeleteStudent from "../hooks/deleteStudent/deleteStudent";
 import Spinner from "../component/ui/spinner/spinner";
 
 const HomePage = (props) => {

@@ -13,6 +13,7 @@ const Login = (props) => {
   const [passwordValue, setPasswordValue] = useState("");
   const { dispatch } = useContext(AuthContext);
   const { login } = useLogin();
+  const [captchaChange, setCaptchaChange] = useState(false)
   useEffect(() => {
     setErrorReport("");
   }, [props.show]);
@@ -24,6 +25,7 @@ const Login = (props) => {
     setPasswordValue(event.target.value);
   };
   const loginHandler = async () => {
+    setCaptchaChange(!captchaChange)
     setErrorReport("");
     const validate = () => {
       const emailpattern =
@@ -35,8 +37,7 @@ const Login = (props) => {
       }
     };
     if (captcha === captchaValue.toLowerCase()) {
-      const validateResult = validate();
-      if (validateResult) {
+      if (validate) {
         const result = await login(emailValue, passwordValue);
         if (result === "Data Matched") {
           dispatch({ type: "login", payload: emailValue });
@@ -77,7 +78,7 @@ const Login = (props) => {
           value={passwordValue}
         />
       </div>
-      <Captcha oncaptchaValue={setCaptchaValue} onCaptcha={setCaptcha} />
+      <Captcha oncaptchaValue={setCaptchaValue} onCaptcha={setCaptcha} captchaChange={captchaChange} />
       <Button btnType="green" clicked={loginHandler}>
         Login
       </Button>

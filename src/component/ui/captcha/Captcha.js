@@ -28,7 +28,7 @@ const Captcha = (props) => {
   };
   useEffect(() => {
     createCaptcha();
-  }, []);
+  }, [props.captchaChange]);
   return (
     <div className="captcha-conteiner">
       <div>

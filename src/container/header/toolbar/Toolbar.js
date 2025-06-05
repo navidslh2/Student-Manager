@@ -11,6 +11,7 @@ import Login from "../../../component/user/Login/Login";
 import Signin from "../../../component/user/signin/Signin";
 
 
+
 const Toolbar = () => {
   const [showModal, setShowModal] = useState(false);
   const [showSideDrawer, setShowSideDrawer] = useState(false);
@@ -42,7 +43,6 @@ const Toolbar = () => {
   const userInfo = JSON.parse(localStorage.getItem("user"));
   if (userInfo) {
     auth = true;
-    // setShowModal(false)
   }
   useEffect(() => {
     if (auth) {
@@ -56,7 +56,7 @@ const Toolbar = () => {
       <SideDrawer open={showSideDrawer} />
       <div className="hamberger">
         <Button btnType="green" clicked={sideDrawerHamdler}>
-          <i class="fa-solid fa-bars"></i>
+          <i className="fa-solid fa-bars"></i>
         </Button>
       </div>
 

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router";
 import { AuthContext } from "../context/auth/authContext";
 import ModalMessage from "../component/ui/modalMessage/modalMessage";
-import useEditStudent from "../hooks/useEditStudent";
+import useEditStudent from "../hooks/useEditStudent/useEditStudent";
 import EditStudents from "../component/students/editStudent/editStudent";
 
 const EditStudentPage = () => {
