@@ -48,7 +48,7 @@ const AddStudentPage = (props) => {
     } else alert("fill in all");
   };
   if (result) {
-    return <Navigate to="/" replace />;
+    navigate("/", { replace: true });
   }
   // finish add student
   return (

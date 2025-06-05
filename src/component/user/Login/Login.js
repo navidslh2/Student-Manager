@@ -4,6 +4,7 @@ import "./Login.css";
 import { AuthContext } from "../../../context/auth/authContext";
 import useLogin from "../../../hooks/useLogin/useLogin";
 import Captcha from "../../ui/captcha/Captcha";
+import { line } from "framer-motion/client";
 
 const Login = (props) => {
   const [captchaValue, setCaptchaValue] = useState("");
@@ -13,7 +14,7 @@ const Login = (props) => {
   const [passwordValue, setPasswordValue] = useState("");
   const { dispatch } = useContext(AuthContext);
   const { login } = useLogin();
-  const [captchaChange, setCaptchaChange] = useState(false)
+  const [captchaChange, setCaptchaChange] = useState(false);
   useEffect(() => {
     setErrorReport("");
   }, [props.show]);
@@ -25,7 +26,7 @@ const Login = (props) => {
     setPasswordValue(event.target.value);
   };
   const loginHandler = async () => {
-    setCaptchaChange(!captchaChange)
+    setCaptchaChange(!captchaChange);
     setErrorReport("");
     const validate = () => {
       const emailpattern =
@@ -60,31 +61,40 @@ const Login = (props) => {
 
   return (
     <>
-      <h2 style={{ marginBottom: "20px" }}>Login</h2>
-      <div style={{ color: "red" }}>{errorReport}</div>
-      <div className="input-container">
-        <input
-          type="text"
-          placeholder="email"
-          onChange={emailChangeHandler}
-          value={emailValue}
+      <div className={props.lightmode ? null : "dark"}>
+        <h2 style={{ marginBottom: "20px" }}>Login</h2>
+        <div style={{ color: "red" }}>{errorReport}</div>
+
+  
+        <div className="input-container">
+          <input
+            type="text"
+            placeholder="email"
+            onChange={emailChangeHandler}
+            value={emailValue}
+          />
+        </div>
+        <div className="input-container">
+          <input
+            type="password"
+            placeholder="password"
+            onChange={passwordChangeHandler}
+            value={passwordValue}
+          />
+        </div>
+        
+        <Captcha
+          oncaptchaValue={setCaptchaValue}
+          onCaptcha={setCaptcha}
+          captchaChange={captchaChange}
         />
-      </div>
-      <div className="input-container">
-        <input
-          type="password"
-          placeholder="password"
-          onChange={passwordChangeHandler}
-          value={passwordValue}
-        />
-      </div>
-      <Captcha oncaptchaValue={setCaptchaValue} onCaptcha={setCaptcha} captchaChange={captchaChange} />
-      <Button btnType="green" clicked={loginHandler}>
-        Login
-      </Button>
-      <div>
-        Don't have an account?{" "}
-        <span onClick={props.showLoginHandler}>Sign in</span>
+        <Button btnType="green" clicked={loginHandler}>
+          Login
+        </Button>
+        <div>
+          Don't have an account?{" "}
+          <span onClick={props.showLoginHandler} style={{textDecoration:'underline', cursor:'pointer'}}>Sign in</span>
+        </div>
       </div>
     </>
   );

@@ -1,53 +1,48 @@
 .input-container {
-    width: 90%;
-    margin: 10px auto;
-    border-bottom: solid 1px #c7dfff7a;  
+  width: 90%;
+  margin: 10px auto;
+  border-bottom: solid 1px #c7dfff7a;
 }
 
-.input-container input{
-    display: block;
-    width: 100%;
-    height: 45px;
-    background-color: transparent;
-    padding: 0 20px;
-    outline: none;
-    box-sizing: border-box;
-    margin: auto;
-    border: none;
-    color: whitesmoke;
+.input-container input {
+  display: block;
+  width: 100%;
+  height: 45px;
+  background-color: transparent;
+  padding: 0 20px;
+  outline: none;
+  box-sizing: border-box;
+  margin: auto;
+  border: none;
+  color: whitesmoke;
 }
-input::placeholder{
-    color: rgba(231, 231, 231, 0.507);
-    font-size: 15px;
-    transition: opacity 0.2s ease-in-out;
-
+input::placeholder {
+  color: rgba(231, 231, 231, 0.507);
+  font-size: 15px;
+  transition: opacity 0.2s ease-in-out;
 }
-input:focus::placeholder{
-    opacity: 0;
+input:focus::placeholder {
+  opacity: 0;
 }
-.captcha-conteiner {
-    width: 90%;     
-    margin: 30px auto;
-    border-bottom: solid 1px #c7dfff7a; 
-    display:  flex;
-    align-items: center;
-    justify-content: space-between;
+.dark {
+  width: 80%;
+  max-width: 500px;
+  margin: auto;
+  background-color: rgba(0, 49, 82, 0.534);
+  padding: 30px 5px;
+  color: black !important;
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
 }
-.captcha-conteiner div{
-    width: 20%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    gap: 3px;
+.dark input::placeholder {
+  color: rgba(37, 37, 37, 0.897);
+  font-size: 15px;
+  transition: opacity 0.2s ease-in-out;
 }
-.captcha-conteiner input {
-    width: 65%;
-    background-color: transparent;
-    outline: none;
-    border: none;
-    color: whitesmoke;
-    transition: opacity 0.2s ease-in-out;
-}
-.captcha-conteiner span {
-    font-size: 20px;
+.dark .input-container input {
+  color: black !important;
 }

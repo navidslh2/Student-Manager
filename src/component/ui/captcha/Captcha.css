@@ -6,3 +6,28 @@
     align-items: center;
     justify-content: space-between;
 }
+.captcha-conteiner div {
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 3px;
+}
+.captcha-conteiner input {
+  width: 65%;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  transition: opacity 0.2s ease-in-out;
+  -webkit-transition:;
+  -moz-transition:;
+  -ms-transition:;
+  -o-transition:;
+}
+.captcha-conteiner span {
+  font-size: 20px;
+}
+.input-container input:-webkit-autofill {
+  background-color: transparent !important;
+  transition: background-color 9999s ease-in-out 0s;
+}

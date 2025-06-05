@@ -10,6 +10,7 @@ import React, { Suspense, useContext } from "react";
 import AuthContext from "./context/auth/authContext";
 import AuthContextProvider from "./context/auth/authContext";
 import StudentContextProvider from "./context/students/studentContext";
+import SigninPage from "./pages/SigninPage";
 const AddStudentPage = React.lazy(() => import("./pages/AddStudentPage"));
 
 function App() {
@@ -181,7 +182,7 @@ function App() {
                 }
               />
               <Route path="students/:id" element={<EditStudentPage />} />
-
+              <Route path="/login" element={<SigninPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </div>

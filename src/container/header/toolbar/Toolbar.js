@@ -15,7 +15,6 @@ import Signin from "../../../component/user/signin/Signin";
 const Toolbar = () => {
   const [showModal, setShowModal] = useState(false);
   const [showSideDrawer, setShowSideDrawer] = useState(false);
-  const authContext = useContext(AuthContext);
   const { dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
   const [showLogin, setShowLogin] = useState(true);
@@ -76,8 +75,8 @@ const Toolbar = () => {
       </div>
 
       <Modal backdropClick={backdropClickHandler} show={showModal}>
-        {showLogin?(<Login show={showModal} showLoginHandler={showLoginHandler}/>):
-        (<Signin />)}
+        {showLogin?(<Login show={showModal} showLoginHandler={showLoginHandler} lightmode={true}/>):
+        (<Signin lightmode={true}/>)}
 
       </Modal>
     </div>
