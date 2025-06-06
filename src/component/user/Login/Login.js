@@ -38,7 +38,8 @@ const Login = (props) => {
       }
     };
     if (captcha === captchaValue.toLowerCase()) {
-      if (validate) {
+      const isValid = validate()
+      if (isValid) {
         const result = await login(emailValue, passwordValue);
         if (result === "Data Matched") {
           dispatch({ type: "login", payload: emailValue });

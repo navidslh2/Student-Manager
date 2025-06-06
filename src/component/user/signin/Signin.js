@@ -34,47 +34,40 @@ const Signin = (props) => {
     const error = [];
     const validate = () => {
       if (
-        signinNameValue !== "" &&
-        signinEmailValue !== "" &&
-        signinPasswordValue !== "" &&
-        signinConfirmPasswordValue !== ""
+        signinNameValue == "" ||
+        signinEmailValue == "" ||
+        signinPasswordValue == "" ||
+        signinConfirmPasswordValue == ""
       ) {
-        if (captcha === captchaValue) {
-          const emailpattern =
-            /^([a-zA-z0-9\.-]+)@([a-z0-9]+).([a-z]{2,5})(.[a-z]{2,5})?$/;
-          const namePattern = /^([a-zA-Z\s]+)$/;
-          const passwordPattern = /^(?=.*[a-z])(?=.*\d).{8,}$/i;
-          if (!namePattern.test(signinNameValue)) {
-            error.push("Please enter a valid full name");
-          }
-          if (!emailpattern.test(signinEmailValue)) {
-            error.push("Please enter a valid email");
-          }
-          if (signinPasswordValue.length < 8) {
-            error.push("The password must be more than 7 characters.");
-          }
-          if (!passwordPattern.test(signinPasswordValue)) {
-            error.push("Password must be include both letters and numbers");
-          }
-          if (signinPasswordValue !== signinConfirmPasswordValue) {
-            error.push("Passwords do not match");
-            setErrorReport(error);
-            return false;
-          }
-        } else {
-          error.push("captcha invalid");
-          setErrorReport(error);
-          return false;
-        }
-      } else {
         error.push("Please fill in all the fields");
-        setErrorReport(error);
-        return false;
       }
-      return true;
+      if (captcha !== captchaValue) {
+        error.push("captcha invalid");
+      }
+      const emailpattern =
+        /^([a-zA-z0-9\.-]+)@([a-z0-9]+).([a-z]{2,5})(.[a-z]{2,5})?$/;
+      const namePattern = /^([a-zA-Z\s]+)$/;
+      const passwordPattern = /^(?=.*[a-z])(?=.*\d).{6,}$/i;
+      if (!namePattern.test(signinNameValue)) {
+        error.push("Please enter a valid full name");
+      }
+      if (!emailpattern.test(signinEmailValue)) {
+        error.push("Please enter a valid email");
+      }
+      if (signinPasswordValue.length < 6) {
+        error.push("The password must be more than 6 characters.");
+      }
+      if (!passwordPattern.test(signinPasswordValue)) {
+        error.push("Password must be include both letters and numbers");
+      }
+      if (signinPasswordValue !== signinConfirmPasswordValue) {
+        error.push("Passwords do not match");
+      }
+      setErrorReport(error);
+      return error.length ===0 ;
     };
-    validate();
-    if (validate) {
+    const isValid = validate();
+    if (isValid) {
       const data = await signin(
         signinNameValue,
         signinEmailValue,
