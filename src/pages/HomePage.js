@@ -31,7 +31,7 @@ const HomePage = (props) => {
   const searchFilterFunction = (event) => {
     const searchData = event.target.value.toUpperCase();
     const search = arrayHolder.filter((item) => {
-      const itemName = item.fullName.toUpperCase();
+      const itemName = item.student_name.toUpperCase();
       return itemName.indexOf(searchData) > -1;
     });
     setSearchBarValue(event.target.value);

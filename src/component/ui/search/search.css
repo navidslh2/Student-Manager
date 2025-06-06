@@ -37,10 +37,10 @@ svg{
 }
 @media (max-width:700px){
     .searchbar-container {
-        width: 20%;
+        width: 40%;
     }
     .searchbar-container:focus-within{
-        width: 40%;
+        width: 80%;
     }
 }
 
